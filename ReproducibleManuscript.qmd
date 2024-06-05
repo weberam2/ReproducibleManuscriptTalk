@@ -1,0 +1,51 @@
+---
+title: "Reproducible Manuscripts"
+author: "Alexander Mark Weber"
+format:
+  revealjs:
+    incremental: true
+---
+
+# Bridge-In
+
+## Scientific Method {.smaller}
+
+What is the scientific method (broadly)?
+
+1. Define a question
+2. Gather information and resources (observe)
+3. Form an explanatory hypothesis
+4. Test the hypothesis by performing an experiment and collecting data in a reproducible manner
+5. Analyze the data
+6. Interpret the data and draw conclusions that serve as a starting point for a new hypothesis
+7. Publish results
+
+::: {.fragment .highlight-red}
+8. Retest (frequently done by other scientists)
+:::
+
+::: {.notes}
+
+:::
+
+## Problem
+
+::: {.notes}
+[https://www.nature.com/articles/s44271-023-00003-2]
+:::
+
+# Introduction
+
+## What is a reproducible manuscript?
+
+- Reports the scientific findings
+- Provides all (or almost all) the necessary data, code, and methodologies required to create those findings (i.e. data, stats, figures, tables, etc.)
+- Transparent and organized
+- Enables others to *replicate* and *verify* the results of your study independently
+
+
+
+|               | Column2        | Column3        |
+| ------------- | -------------- | -------------- |
+| Item1         | Item1          | Item1          |
+
