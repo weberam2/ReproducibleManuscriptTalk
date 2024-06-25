@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="ReproducibleManuscript_files/libs/revealjs/dist/theme/quarto.css">
   <link href="ReproducibleManuscript_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -337,13 +402,22 @@ Alexander Mark Weber
 </div>
 
 </section>
+
 <section>
 <section id="bridge-in" class="title-slide slide level1 center">
 <h1>Bridge-In</h1>
 
 </section>
-<section id="scientific-method" class="slide level2 smaller">
+<section id="mentimeter" class="slide level2" data-background-iframe="https://www.mentimeter.com/app/presentation/alhxhotzzgd4mi8ai93m1xmvebrziidm/embed">
+<h2>Mentimeter</h2>
+<!-- data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAADNklEQVR4nO2WLVYrQRBGKwuADcAGYAGAwuFQ4MAEBwYcDgUKBwoHBhwoXFxUsoG4uGQBSRaQ13dyKpDAE5jJJ757zuT09E81p25XD41+vz8NI4OFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIsVIhvV4vtre3S+uLwWBQfiM2NzfL7xfdbjd2d3dL6+8Qc319vXoS+uC3fba2thbm1slKhJCMi4uLSkjZv/TMuL29jeFwWFoRBwcHcXx8XM29vr6uZJCsp6enPyXr9PQ0Op1OvL6+xt7eXumJeH9/j1arVVoRGxsbcXNzE+PxOM7Pz+f73N/f/5BVBysRkpycnMTb21tpRZUQ3j8/P8tbxP7+frTb7Xh4eKgSgxwSybyzs7MyY7bm4+Mjms1mwMvLSxwdHf0QRtzLy8u5kIwNh4eH1d+AIOIRmzYPUupGRginmCRwWoExEkJ1ZDKZ8/j4OF8DVBVja2trlRzWLEOsjEFV3t3dzWMQH4nsTVUyB1iTc+pESghXxdXVVXmbjZFEBOQ1tZxM4FQzl/GctwzjxCLZ7EPMjEEFck3Rl3OAyslqrRMpId9POGO0OcGZKOaQuFyTcPdPJpPqO/EbxMoY+U3KGKxtliuPw4AY5iCZ/pxTJzJCSALvnEranFDu+efn5+qdyuE05/ckyXEeksm1swxxUwgQm32ppmxzZVGBXJm0kU+7blYihI8z1UAC+LeXO5wkZz+nmATSR6I5rY1GI6bT6cK1xBjJ/i6Rdo5nPPZB5M7OTpVk+qk0+nJvoHKotNFotLBPnaxEiPk/FiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiLGPxfY2Bvll5LhAAAAAElFTkSuQmCC -->
+</section>
+<section id="scientific-method" class="slide level2" data-background-iframe="https://www.mentimeter.com/app/presentation/alhxhotzzgd4mi8ai93m1xmvebrziidm/embed">
 <h2>Scientific Method</h2>
+<!-- data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAADNklEQVR4nO2WLVYrQRBGKwuADcAGYAGAwuFQ4MAEBwYcDgUKBwoHBhwoXFxUsoG4uGQBSRaQ13dyKpDAE5jJJ757zuT09E81p25XD41+vz8NI4OFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIsVIhvV4vtre3S+uLwWBQfiM2NzfL7xfdbjd2d3dL6+8Qc319vXoS+uC3fba2thbm1slKhJCMi4uLSkjZv/TMuL29jeFwWFoRBwcHcXx8XM29vr6uZJCsp6enPyXr9PQ0Op1OvL6+xt7eXumJeH9/j1arVVoRGxsbcXNzE+PxOM7Pz+f73N/f/5BVBysRkpycnMTb21tpRZUQ3j8/P8tbxP7+frTb7Xh4eKgSgxwSybyzs7MyY7bm4+Mjms1mwMvLSxwdHf0QRtzLy8u5kIwNh4eH1d+AIOIRmzYPUupGRginmCRwWoExEkJ1ZDKZ8/j4OF8DVBVja2trlRzWLEOsjEFV3t3dzWMQH4nsTVUyB1iTc+pESghXxdXVVXmbjZFEBOQ1tZxM4FQzl/GctwzjxCLZ7EPMjEEFck3Rl3OAyslqrRMpId9POGO0OcGZKOaQuFyTcPdPJpPqO/EbxMoY+U3KGKxtliuPw4AY5iCZ/pxTJzJCSALvnEranFDu+efn5+qdyuE05/ckyXEeksm1swxxUwgQm32ppmxzZVGBXJm0kU+7blYihI8z1UAC+LeXO5wkZz+nmATSR6I5rY1GI6bT6cK1xBjJ/i6Rdo5nPPZB5M7OTpVk+qk0+nJvoHKotNFotLBPnaxEiPk/FiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiLGPxfY2Bvll5LhAAAAAElFTkSuQmCC -->
+</section>
+<section id="scientific-method-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Scientific Method</h2>
 <p>What is the scientific method (broadly)?</p>
 <ol type="1">
 <li class="fragment">Define a question</li>
@@ -352,13 +426,13 @@ Alexander Mark Weber
 <li class="fragment">Test the hypothesis by performing an experiment and collecting data in a reproducible manner</li>
 <li class="fragment">Analyze the data</li>
 <li class="fragment">Interpret the data and draw conclusions that serve as a starting point for a new hypothesis</li>
-<li class="fragment">Publish results</li>
+<li class="fragment"><p style="color:red;">
+Publish results
+</p></li>
+<li class="fragment"><p style="color:red;">
+Retest (frequently done by other scientists)
+</p></li>
 </ol>
-<div class="fragment highlight-red">
-<ol start="8" type="1">
-<li class="fragment">Retest (frequently done by other scientists)</li>
-</ol>
-</div>
 <aside class="notes">
 
 <style type="text/css">
@@ -372,7 +446,157 @@ Alexander Mark Weber
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
+</section>
+<section id="scientific-method-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Scientific Method</h2>
+<div style="margin-top: 150px; font-size: 1.5em; color: red;">
+<ol start="7" type="1">
+<li>Publish Results</li>
+<li>Retest (frequently done by other scientists)</li>
+</ol>
+</div>
+</section>
+<section id="problem" class="slide level2">
+<h2>Problem</h2>
+<ul>
+<li class="fragment">In 2011, John Ioannidis<a href="#/footnotes" class="footnote-ref" id="fnref1" role="doc-noteref" data-footnote-href="#/fn1" onclick=""><sup>1</sup></a> published <img data-src="img/IoannidisPaper.png"></li>
+<li class="fragment">Why?
+<ul>
+<li class="fragment">Studies are underpowered</li>
+<li class="fragment">Current incentives lead scientists to publish quantity over quality</li>
+<li class="fragment">No incentives for scientists to replicate other studies</li>
+<li class="fragment">More…</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>John suggested that the majority of all published papers at the time were likely not true. Or put another way, wouldn’t be reproduced</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside></aside></section>
+<section id="problem-1" class="slide level2">
+<h2>Problem</h2>
+<p>Was he right?</p>
+<ul>
+<li class="fragment">In 2015, the Open Science Collaboration sampled studies from prominent journals to estimate the replicability of psychological research.<a href="#/footnotes" class="footnote-ref" id="fnref2" role="doc-noteref" data-footnote-href="#/fn2" onclick=""><sup>2</sup></a></li>
+</ul>
+<aside></aside></section>
+<section id="problem-2" class="slide level2" data-background-iframe="https://www.mentimeter.com/app/presentation/alhxhotzzgd4mi8ai93m1xmvebrziidm/embed">
+<h2>Problem</h2>
+<!-- data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAADNklEQVR4nO2WLVYrQRBGKwuADcAGYAGAwuFQ4MAEBwYcDgUKBwoHBhwoXFxUsoG4uGQBSRaQ13dyKpDAE5jJJ757zuT09E81p25XD41+vz8NI4OFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIsVIhvV4vtre3S+uLwWBQfiM2NzfL7xfdbjd2d3dL6+8Qc319vXoS+uC3fba2thbm1slKhJCMi4uLSkjZv/TMuL29jeFwWFoRBwcHcXx8XM29vr6uZJCsp6enPyXr9PQ0Op1OvL6+xt7eXumJeH9/j1arVVoRGxsbcXNzE+PxOM7Pz+f73N/f/5BVBysRkpycnMTb21tpRZUQ3j8/P8tbxP7+frTb7Xh4eKgSgxwSybyzs7MyY7bm4+Mjms1mwMvLSxwdHf0QRtzLy8u5kIwNh4eH1d+AIOIRmzYPUupGRginmCRwWoExEkJ1ZDKZ8/j4OF8DVBVja2trlRzWLEOsjEFV3t3dzWMQH4nsTVUyB1iTc+pESghXxdXVVXmbjZFEBOQ1tZxM4FQzl/GctwzjxCLZ7EPMjEEFck3Rl3OAyslqrRMpId9POGO0OcGZKOaQuFyTcPdPJpPqO/EbxMoY+U3KGKxtliuPw4AY5iCZ/pxTJzJCSALvnEranFDu+efn5+qdyuE05/ckyXEeksm1swxxUwgQm32ppmxzZVGBXJm0kU+7blYihI8z1UAC+LeXO5wkZz+nmATSR6I5rY1GI6bT6cK1xBjJ/i6Rdo5nPPZB5M7OTpVk+qk0+nJvoHKotNFotLBPnaxEiPk/FiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiKGhYhhIWJYiBgWIoaFiGEhYliIGBYihoWIYSFiWIgYFiLGPxfY2Bvll5LhAAAAAElFTkSuQmCC -->
+</section>
+<section id="problem-3" class="slide level2 nonincremental">
+<h2>Problem</h2>
+
+<img data-src="ReproducibleManuscript_files/figure-revealjs/fig-opensci-1.png" id="fig-opensci" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+</p><aside class="notes">
+<p>[https://www.nature.com/articles/s44271-023-00003-2]</p>
+<p>Out of 100 independently performed replications, only 39% were subjectively labelled as successful replications, and on average, the effects were roughly half the original size</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="problem-4" class="slide level2">
+<h2>Problem</h2>
+<p>Not just in Psychology:</p>
+<ul>
+<li class="fragment">animal behaviour<a href="#/footnotes" class="footnote-ref" id="fnref3" role="doc-noteref" data-footnote-href="#/fn3" onclick=""><sup>3</sup></a>;</li>
+<li class="fragment">cancer biology<a href="#/footnotes" class="footnote-ref" id="fnref4" role="doc-noteref" data-footnote-href="#/fn4" onclick=""><sup>4</sup></a>;</li>
+<li class="fragment">economics<a href="#/footnotes" class="footnote-ref" id="fnref5" role="doc-noteref" data-footnote-href="#/fn5" onclick=""><sup>5</sup></a></li>
+<li class="fragment">pharmaceutical industry<a href="#/footnotes" class="footnote-ref" id="fnref6" role="doc-noteref" data-footnote-href="#/fn6" onclick=""><sup>6</sup></a></li>
+<li class="fragment">neuroscience<a href="#/footnotes" class="footnote-ref" id="fnref7" role="doc-noteref" data-footnote-href="#/fn7" onclick=""><sup>7</sup></a></li>
+<li class="fragment">neuroimaging<a href="#/footnotes" class="footnote-ref" id="fnref8" role="doc-noteref" data-footnote-href="#/fn8" onclick=""><sup>8</sup></a></li>
+<li class="fragment">clinical trials<a href="#/footnotes" class="footnote-ref" id="fnref9" role="doc-noteref" data-footnote-href="#/fn9" onclick=""><sup>9</sup></a></li>
+</ul>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside></aside></section>
+<section id="problem-5" class="slide level2">
+<h2>Problem</h2>
+<ul>
+<li class="fragment"><p>For clinical trials: 44% contained at least some flawed data:</p>
+<ul>
+<li class="fragment">impossible statistics,</li>
+<li class="fragment">incorrect calculations,</li>
+<li class="fragment">or duplicated numbers or figures</li>
+</ul></li>
+<li class="fragment"><p>Publishing irreproducible results is worse than not publishing: more difficult to eliminate an idea than it is to introduce it<a href="#/footnotes" class="footnote-ref" id="fnref10" role="doc-noteref" data-footnote-href="#/fn10" onclick=""><sup>10</sup></a></p></li>
+<li class="fragment"><p>Spurious results can mislead other researchers who conduct follow-up investigations or try to integrate findings into broader theories.</p></li>
+</ul>
+<aside class="notes">
+<p>For the clinical trials; for more than 150 trials, the author of the paper got access to anonymized individual participant data (IPD). By studying the IPD spreadsheets, he judged that 44% of these trials contained at least some flawed data: impossible statistics, incorrect calculations or duplicated numbers or figures, for instance. And 26% of the papers had problems that were so widespread that the trial was impossible to trust, he judged — either because the authors were incompetent, or because they had faked the data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside></aside></section>
+<section id="what-can-we-do" class="slide level2">
+<h2>What Can We Do?</h2>
+<ul>
+<li class="fragment"><p>Many solutions are needed; far outside the scope of this talk</p></li>
+<li class="fragment"><p><strong>One thing we can do is change the way we write papers.</strong> <img data-src="img/worddoc.png" style="width:55.0%;height:55.0%"></p></li>
+<li class="fragment"><p>Currently, papers are written and published in a way that results in <strong>errors</strong> and the inability to <strong>computationally reproduce</strong> results.</p></li>
+</ul>
+</section>
+<section id="what-can-we-do-1" class="slide level2">
+<h2>What Can We Do?</h2>
+<ul>
+<li class="fragment"><strong>Errors</strong>: a 2016 paper by Nuijten et al.<a href="#/footnotes" class="footnote-ref" id="fnref11" role="doc-noteref" data-footnote-href="#/fn11" onclick=""><sup>11</sup></a> found that
+<ul>
+<li class="fragment">nearly <strong>half</strong> of all papers had errors in them;</li>
+<li class="fragment">over <strong>10%</strong> of p-values in published papers were inconsistent with the reported details of the statistical test</li>
+<li class="fragment">1.6% were what they called “grossly” inconsistent, e.g.&nbsp;difference between the p-value and the test statistic meant that one implied statistical significance and the other did not</li>
+</ul></li>
+</ul>
+<aside></aside></section>
+<section id="what-can-we-do-2" class="slide level2">
+<h2>What Can We Do?</h2>
+<ul>
+<li class="fragment"><strong>Computational reproducibility</strong>: a 2021 paper by Hardwicke et al.<a href="#/footnotes" class="footnote-ref" id="fnref12" role="doc-noteref" data-footnote-href="#/fn12" onclick=""><sup>12</sup></a> attempted to reproduce results from 25 published papers that publicly shared their data and code:
+<ul>
+<li class="fragment">found substantial numerical discrepancies between reported statistical values and values obtained from reproduction attempts in <strong>64%</strong> of these papers</li>
+</ul></li>
+</ul>
+<aside></aside></section>
+<section id="what-can-we-do-3" class="slide level2">
+<h2>What Can We Do?</h2>
+<p>This is where <strong>Reproducible Papers</strong> come in…</p>
+
+<img data-src="img/reprocpaper_example.png" class="r-stretch"></section></section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
@@ -380,25 +604,630 @@ Alexander Mark Weber
 </section>
 <section id="what-is-a-reproducible-manuscript" class="slide level2">
 <h2>What is a reproducible manuscript?</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
 <ul>
 <li class="fragment">Reports the scientific findings</li>
 <li class="fragment">Provides all (or almost all) the necessary data, code, and methodologies required to create those findings (i.e.&nbsp;data, stats, figures, tables, etc.)</li>
 <li class="fragment">Transparent and organized</li>
-<li class="fragment">Enables others to <em>replicate</em> and <em>verify</em> the results of your study independently</li>
+<li class="fragment">Enables others to <strong>replicate</strong> and <strong>verify</strong> the results of your study independently</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="img/qmark.png"></p>
+</div>
+</div>
+</section>
+<section id="what-does-it-look-like" class="slide level2 smaller">
+<h2>What does it look like?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource qmd number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>---</span>
+<span id="cb1-2"><a href=""></a>title: "The Application of Magnetic Susceptibility Separation for Measuring Cerebral Oxygenation in Preterm Neonates"</span>
+<span id="cb1-3"><a href=""></a>titlerunning: "CSVO2"</span>
+<span id="cb1-4"><a href=""></a>author:</span>
+<span id="cb1-5"><a href=""></a>  - name: Thomas Gavin Carmichael</span>
+<span id="cb1-6"><a href=""></a>    orcid: 0009-0008-6849-5333</span>
+<span id="cb1-7"><a href=""></a>    corresponding: false</span>
+<span id="cb1-8"><a href=""></a>    email: tgcarmichael@outlook.com</span>
+<span id="cb1-9"><a href=""></a>    roles:</span>
+<span id="cb1-10"><a href=""></a>      - writing - original draft</span>
+<span id="cb1-11"><a href=""></a>      - formal analysis</span>
+<span id="cb1-12"><a href=""></a>      - methodology</span>
+<span id="cb1-13"><a href=""></a>      - validation</span>
+<span id="cb1-14"><a href=""></a>      - visualization</span>
+<span id="cb1-15"><a href=""></a>    affiliations:</span>
+<span id="cb1-16"><a href=""></a>      - ref: 1</span>
+<span id="cb1-17"><a href=""></a>      - ref: 2</span>
+<span id="cb1-18"><a href=""></a>    degrees:</span>
+<span id="cb1-19"><a href=""></a>      - HBSc</span>
+<span id="cb1-20"><a href=""></a>  - name: Alexander Rauscher</span>
+<span id="cb1-21"><a href=""></a>    orcid: 0000-0002-1961-8252</span>
+<span id="cb1-22"><a href=""></a>    email: rauscher@physics.ubc.ca</span>
+<span id="cb1-23"><a href=""></a>    corresponding: false</span>
+<span id="cb1-24"><a href=""></a>    roles:</span>
+<span id="cb1-25"><a href=""></a>      - writing - review &amp; editing</span>
+<span id="cb1-26"><a href=""></a>    affiliations:</span>
+<span id="cb1-27"><a href=""></a>      - ref: 3</span>
+<span id="cb1-28"><a href=""></a>    degrees:</span>
+<span id="cb1-29"><a href=""></a>      - PhD</span>
+<span id="cb1-30"><a href=""></a>      - MSc</span>
+<span id="cb1-31"><a href=""></a>  - name: Ruth E Grunau</span>
+<span id="cb1-32"><a href=""></a>    orcid: 0000-0002-5428-9212</span>
+<span id="cb1-33"><a href=""></a>    corresponding: false</span>
+<span id="cb1-34"><a href=""></a>    email: rgrunau@mail.ubc.ca</span>
+<span id="cb1-35"><a href=""></a>    roles:</span>
+<span id="cb1-36"><a href=""></a>      - writing - review &amp; editing</span>
+<span id="cb1-37"><a href=""></a>      - funding acquisition</span>
+<span id="cb1-38"><a href=""></a>    affiliations:</span>
+<span id="cb1-39"><a href=""></a>      - ref: 2</span>
+<span id="cb1-40"><a href=""></a>      - ref: 3</span>
+<span id="cb1-41"><a href=""></a>  - name: Alexander Mark Weber</span>
+<span id="cb1-42"><a href=""></a>    orcid: 0000-0001-7295-0775</span>
+<span id="cb1-43"><a href=""></a>    corresponding: true</span>
+<span id="cb1-44"><a href=""></a>    email: aweber@bcchr.ca</span>
+<span id="cb1-45"><a href=""></a>    roles:</span>
+<span id="cb1-46"><a href=""></a>      - project administration</span>
+<span id="cb1-47"><a href=""></a>      - supervision</span>
+<span id="cb1-48"><a href=""></a>      - validation</span>
+<span id="cb1-49"><a href=""></a>      - visualization</span>
+<span id="cb1-50"><a href=""></a>      - resources</span>
+<span id="cb1-51"><a href=""></a>      - methodology</span>
+<span id="cb1-52"><a href=""></a>      - formal analysis</span>
+<span id="cb1-53"><a href=""></a>      - funding acquisition</span>
+<span id="cb1-54"><a href=""></a>      - writing - review &amp; editing</span>
+<span id="cb1-55"><a href=""></a>      - conceptualization</span>
+<span id="cb1-56"><a href=""></a>      - data curation</span>
+<span id="cb1-57"><a href=""></a>      - investigation</span>
+<span id="cb1-58"><a href=""></a>    affiliations:</span>
+<span id="cb1-59"><a href=""></a>      - ref: 2</span>
+<span id="cb1-60"><a href=""></a>      - ref: 3</span>
+<span id="cb1-61"><a href=""></a>    degrees:</span>
+<span id="cb1-62"><a href=""></a>      - PhD</span>
+<span id="cb1-63"><a href=""></a>      - MSc</span>
+<span id="cb1-64"><a href=""></a>affiliations:</span>
+<span id="cb1-65"><a href=""></a>  - id: 1</span>
+<span id="cb1-66"><a href=""></a>    name: The University of British Columbia</span>
+<span id="cb1-67"><a href=""></a>    department: Integrated Sciences</span>
+<span id="cb1-68"><a href=""></a>    address: 2329 West Mall</span>
+<span id="cb1-69"><a href=""></a>    city: Vancouver</span>
+<span id="cb1-70"><a href=""></a>    region: BC</span>
+<span id="cb1-71"><a href=""></a>    country: Canada</span>
+<span id="cb1-72"><a href=""></a>    postal-code: V6T 1Z4</span>
+<span id="cb1-73"><a href=""></a>  - id: 3</span>
+<span id="cb1-74"><a href=""></a>    name: The University of British Columbia</span>
+<span id="cb1-75"><a href=""></a>    department: Pediatrics</span>
+<span id="cb1-76"><a href=""></a>    address: 2329 West Mall</span>
+<span id="cb1-77"><a href=""></a>    city: Vancouver</span>
+<span id="cb1-78"><a href=""></a>    region: BC</span>
+<span id="cb1-79"><a href=""></a>    country: Canada</span>
+<span id="cb1-80"><a href=""></a>    postal-code: V6T 1Z4</span>
+<span id="cb1-81"><a href=""></a>  - id: 2</span>
+<span id="cb1-82"><a href=""></a>    department: BC Children's Hospital Research Institute</span>
+<span id="cb1-83"><a href=""></a>    name: The University of British Columbia</span>
+<span id="cb1-84"><a href=""></a>    address: 938 West 28th Avenue</span>
+<span id="cb1-85"><a href=""></a>    city: Vancouver</span>
+<span id="cb1-86"><a href=""></a>    state: BC</span>
+<span id="cb1-87"><a href=""></a>    country: Canada</span>
+<span id="cb1-88"><a href=""></a>    postal-code: V5Z 4H4</span>
+<span id="cb1-89"><a href=""></a></span>
+<span id="cb1-90"><a href=""></a>keywords:</span>
+<span id="cb1-91"><a href=""></a>  - Quantitative Susceptbility Mapping</span>
+<span id="cb1-92"><a href=""></a>  - Preterm</span>
+<span id="cb1-93"><a href=""></a>  - Newborn</span>
+<span id="cb1-94"><a href=""></a>  - Cerebral Venous Oxygen Saturation</span>
+<span id="cb1-95"><a href=""></a>abstract: |</span>
+<span id="cb1-96"><a href=""></a>  **Background**: Quantitative susceptibility mapping (QSM) is a magnetic resonance imaging (MRI) modality proposed to be a viable method of measuring cerebral oxygenation in neonates given its sensitivity to deoxyhemoglobin, a paramagnetic molecule. During QSM, however, paramagnetic sources can be obscured by opposing diamagnetic sources such as water and myelin. We sought to evaluate whether QSM images alone, or an algorithm that attempts to isolate their paramagnetic components, are more accurate in measuring oxygenation of the major cerebral veins in a cohort of neonates born preterm. Additionally, we aimed to determine whether a difference in oxygenation existed between the major cerebral veins.</span>
+<span id="cb1-97"><a href=""></a>  </span>
+<span id="cb1-98"><a href=""></a>  **Methods**: 19 neonates born preterm were scanned on a 3T research MRI at term equivalent age. The protocol included a multi-echo susceptibility-weighted imaging sequence. The acquired imaging data were processed as QSM images to obtain the susceptibility values of the superior sagittal sinus (SSS) and central cerebral veins (CCV). These values were used to calculate the oxygen saturation (SvO~2~) of the SSS and CCV.  QSM images were subsequently processed to isolate their paramagnetic components. SvO~2~ values of the SSS and CCV were calculated again from the paramagnetic components.</span>
+<span id="cb1-99"><a href=""></a>  </span>
+<span id="cb1-100"><a href=""></a>  **Results**: The mean SvO~2~ values of the SSS and CCV calculated from QSM images were found to be 72.4% (SD, 3.4%) and 68.7% (SD, 3.5%), respectively. The mean SvO~2~ values calculated from paramagnetic components were found to be 58.1% (SD, 7.3%) for the SSS and 57.7% (SD, 7.0%) for the CCV.</span>
+<span id="cb1-101"><a href=""></a>  </span>
+<span id="cb1-102"><a href=""></a>  **Conclusion**: SSS SvO~2~ values derived from paramagnetic components agreed well with the existing literature and were closer than the values derived from QSM, however, they displayed greater variability. Although the CCV SvO~2~ data from QSM aligns more closely with existing literature, it is important to note that the current literature on this topic remains relatively limited in the CCV. Thus, decomposing QSM images into paramagnetic components shows great promise as a method for more accurately measuring cerebral oxygenation in neonates but may require more research to improve precision. Notably, no significant difference in oxygenation was observed between the CCV and the SSS, contrasting with previous studies.</span>
+<span id="cb1-103"><a href=""></a>  </span>
+<span id="cb1-104"><a href=""></a>plain-language-summary: |</span>
+<span id="cb1-105"><a href=""></a>  </span>
+<span id="cb1-106"><a href=""></a>key-points:</span>
+<span id="cb1-107"><a href=""></a>  - </span>
+<span id="cb1-108"><a href=""></a>date: last-modified</span>
+<span id="cb1-109"><a href=""></a>bibliography: [ Gavin_Thesis_Ref.bib ]</span>
+<span id="cb1-110"><a href=""></a>citation:</span>
+<span id="cb1-111"><a href=""></a>  container-title: Unpublished</span>
+<span id="cb1-112"><a href=""></a>number-sections: false</span>
+<span id="cb1-113"><a href=""></a>notebook-links: false</span>
+<span id="cb1-114"><a href=""></a>---</span>
+<span id="cb1-115"><a href=""></a></span>
+<span id="cb1-116"><a href=""></a>```{r setup, include=FALSE}</span>
+<span id="cb1-117"><a href=""></a># options</span>
+<span id="cb1-118"><a href=""></a>knitr::opts_chunk$set(</span>
+<span id="cb1-119"><a href=""></a>  # fig.width=8, fig.height=5, </span>
+<span id="cb1-120"><a href=""></a>  # out.width="50%",</span>
+<span id="cb1-121"><a href=""></a>  # fig.align="center",</span>
+<span id="cb1-122"><a href=""></a>  echo=FALSE, </span>
+<span id="cb1-123"><a href=""></a>  message=FALSE, </span>
+<span id="cb1-124"><a href=""></a>  warning=FALSE</span>
+<span id="cb1-125"><a href=""></a>  # cache=TRUE </span>
+<span id="cb1-126"><a href=""></a>  )</span>
+<span id="cb1-127"><a href=""></a>set.seed(1234) # reproducible</span>
+<span id="cb1-128"><a href=""></a>options(knitr.kable.NA = '') # how kable handles NA</span>
+<span id="cb1-129"><a href=""></a>options(reticulate.repl.quiet = TRUE)</span>
+<span id="cb1-130"><a href=""></a>```</span>
+<span id="cb1-131"><a href=""></a></span>
+<span id="cb1-132"><a href=""></a>```{r libraries}</span>
+<span id="cb1-133"><a href=""></a>#libraries</span>
+<span id="cb1-134"><a href=""></a>library(tidyverse) # ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats</span>
+<span id="cb1-135"><a href=""></a>theme_set( theme_minimal() ) # ggplot theme</span>
+<span id="cb1-136"><a href=""></a>library(broom) # for nice summaries</span>
+<span id="cb1-137"><a href=""></a>library(knitr) # </span>
+<span id="cb1-138"><a href=""></a>library(kableExtra) # more tables options. Can cause problems</span>
+<span id="cb1-139"><a href=""></a>library(Rmpfr)</span>
+<span id="cb1-140"><a href=""></a>library(gt)</span>
+<span id="cb1-141"><a href=""></a># library(reticulate) # incorporate Python</span>
+<span id="cb1-142"><a href=""></a># use_virtualenv('./pythonvenv', required = TRUE) # load pythong venv from path</span>
+<span id="cb1-143"><a href=""></a># library(neurobase)</span>
+<span id="cb1-144"><a href=""></a>```</span>
+<span id="cb1-145"><a href=""></a></span>
+<span id="cb1-146"><a href=""></a>```{r}</span>
+<span id="cb1-147"><a href=""></a>load("notebooks/results.RData")</span>
+<span id="cb1-148"><a href=""></a>```</span>
+<span id="cb1-149"><a href=""></a></span>
+<span id="cb1-150"><a href=""></a>```{r}</span>
+<span id="cb1-151"><a href=""></a># function to make rounding means and sd easier</span>
+<span id="cb1-152"><a href=""></a>rndmean &lt;- function(clm) {</span>
+<span id="cb1-153"><a href=""></a>  return(round(mean(clm),2))</span>
+<span id="cb1-154"><a href=""></a>}</span>
+<span id="cb1-155"><a href=""></a>rndsd &lt;- function(clm) {</span>
+<span id="cb1-156"><a href=""></a>  return(round(sd(clm),2))</span>
+<span id="cb1-157"><a href=""></a>}</span>
+<span id="cb1-158"><a href=""></a>```</span>
+<span id="cb1-159"><a href=""></a></span>
+<span id="cb1-160"><a href=""></a># Introduction {#sec-intro}</span>
+<span id="cb1-161"><a href=""></a></span>
+<span id="cb1-162"><a href=""></a>&lt;!-- should be around 5-6 paragraphs. Aim for 460 words --&gt;</span>
+<span id="cb1-163"><a href=""></a></span>
+<span id="cb1-164"><a href=""></a>Preterm birth </span>
+<span id="cb1-165"><a href=""></a></span>
+<span id="cb1-166"><a href=""></a>Abnormal brain development is a significant concern for parents with children born preterm, as 43% of infants that survive will have neurodevelopmental delays later in life [@dixMonitoringCerebralOxygenation2017]. Irregularities in early cerebral oxygen levels have been identified as a potential source of such delays, where too little oxygen provided during NICU care can result in white matter injury, while too much oxygen can result in reduced cortical connectivity [@rantakariEarlyOxygenLevels2021]. As such, being able to precisely, accurately, and non-invasively measure cerebral oxygenation is necessary for understanding and improving neurodevelopmental outcomes in preterm neonates. </span>
+<span id="cb1-167"><a href=""></a></span>
+<span id="cb1-168"><a href=""></a>In the present study, we set out to determine whether a QSM image alone, or the paramagnetic component of the QSM image, is more accurate in measuring the oxygen present in the major cerebral veins of a cohort of preterm neonates. As previous QSM studies have not included the SSS, we also had a secondary aim of preserving this vessel in our QSM images and using this data to determine whether a difference in oxygenation existed between the SSS and the central cerebral veins (CCV).</span>
+<span id="cb1-169"><a href=""></a></span>
+<span id="cb1-170"><a href=""></a></span>
+<span id="cb1-171"><a href=""></a># Methods {#sec-data-methods}</span>
+<span id="cb1-172"><a href=""></a></span>
+<span id="cb1-173"><a href=""></a>The study was approved by the Clinical Research Ethics Board at the University of British Columbia and Children's &amp; Women's Hospital (H21-00655) and written informed consent was obtained from the parent/guardian for each infant.</span>
+<span id="cb1-174"><a href=""></a></span>
+<span id="cb1-175"><a href=""></a>## Study population</span>
+<span id="cb1-176"><a href=""></a></span>
+<span id="cb1-177"><a href=""></a>Participant data comes from a previous study [@zhu-etal-cmro2]. Participants consisted of preterm neonates born between 25- and 31-weeks gestational age (GA) who were admitted to the level III NICU at BC Women’s Hospital. Recruitment took place over a span of one year, from February 2021 to January 2022, facilitated by a dedicated research nurse. Parents of eligible infants were approached by the research nurse prior to discharge from the NICU to explain the study objectives and seek their consent for participation. Infants meeting the criteria for inclusion were scanned for the study if they had already been discharged from the NICU, were in stable condition, and had reached a term equivalent age of 37 to 44 weeks GA. However, certain exclusion criteria were applied to ensure the homogeneity and integrity of the study sample. Infants were excluded if there was clinical evidence of a congenital malformation or syndrome, a TORCH infection, or ultrasound evidence of large parenchymal hemorrhagic infarction (\&gt;2 cm, Grade 4 intraventricular hemorrhage).</span>
+<span id="cb1-178"><a href=""></a></span>
+<span id="cb1-179"><a href=""></a>## Image acquisition</span>
+<span id="cb1-180"><a href=""></a></span>
+<span id="cb1-181"><a href=""></a>MR imaging was performed on a 3.0 Tesla General Electric Discovery MR750 scanner (scanner software version DV26.0_R03) equipped with a SREE Medical Systems single-channel neonatal head coil (@tbl-mri). The scans were conducted at the BC Children’s MRI Research Facility. Prior to the scanning procedure, subjects were carefully prepared by a research nurse. Swaddling and feeding were used to ensure the comfort and cooperation of the subjects during the scan. Importantly, no sedatives or invasive markers were utilized throughout the procedure. Subjects were placed within a specially designed SREE Medical Systems MRI compatible incubator, which facilitated both safety and motion minimization. Molded foam was strategically positioned around the head and body within the incubator to further restrict subject movement. To protect against potential hearing damage, ear plugs were employed during the scanning process. Additionally, a pulse oximeter was affixed to the subject’s foot to monitor arterial oxygen saturation and heart rate throughout the scan.</span>
+<span id="cb1-182"><a href=""></a></span>
+<span id="cb1-183"><a href=""></a>```{r}</span>
+<span id="cb1-184"><a href=""></a>#| label: tbl-mri</span>
+<span id="cb1-185"><a href=""></a>#| tbl-cap: "Technical parameters for MR imaging pulse sequences"</span>
+<span id="cb1-186"><a href=""></a>df &lt;- data.frame(Scan = character(), T1w = character(), T2w = character(), pcASL = character(), SWI = character(), stringsAsFactors = FALSE)</span>
+<span id="cb1-187"><a href=""></a>df[1,] &lt;- c("Sequence", "3D FSPGR", "3D CUBE", "Multi-shot 3D fast spin-echo", "3D spoiled GRE flow-compensated")</span>
+<span id="cb1-188"><a href=""></a>df[2,] &lt;- c("Phase-encoding direction", "Coronal", "Sagittal", "Axial", "Axial")</span>
+<span id="cb1-189"><a href=""></a>df[3,] &lt;- c("TR (ms)", "7.74", "2,300", "4,680", "30.9")</span>
+<span id="cb1-190"><a href=""></a>df[4,] &lt;- c("TE (ms)", "2.97", "66.29", "10.55", "5.24")</span>
+<span id="cb1-191"><a href=""></a>df[5,] &lt;- c("Flip angle", "12\U00B0", "90\U00B0", "111\U00B0", "20\U00B0")</span>
+<span id="cb1-192"><a href=""></a>df[6,] &lt;- c("FOV (cm)", "20", "20", "24", "25")</span>
+<span id="cb1-193"><a href=""></a>df[7,] &lt;- c("Acquisition matrix", "512 x 512", "256 x 256", "128 x 128", "256 x 256")</span>
+<span id="cb1-194"><a href=""></a>df[8,] &lt;- c("In-plane resolution (mm)", "0.39 x 0.39", "0.78 x 0.78", "1.875 x 1.875", "0.977 x 0.977")</span>
+<span id="cb1-195"><a href=""></a>df[9,] &lt;- c("Slice thickness (mm)", "1", "1", "4", "2, reconstructed to 1 with zero filling (ZIP2)")</span>
+<span id="cb1-196"><a href=""></a>df[10,] &lt;- c("Number of slices", "126", "106", "50", "92")</span>
+<span id="cb1-197"><a href=""></a>df[11,] &lt;- c("Additional parameters", "n/a", "n/a", "1,450 ms label period;\n 2,025 ms pulse label;\n 24 control-label pairs", "n/a")</span>
+<span id="cb1-198"><a href=""></a>df[12,] &lt;- c("Scan duration", "4 min 39 s", "5 min 1 s", "5 min 26 s", "5 min 29 s")</span>
+<span id="cb1-199"><a href=""></a></span>
+<span id="cb1-200"><a href=""></a>footnotetext="T1w = T1-weighted; T2w = T2-weighted; pcASL = pseudo-continuous arterial spin labelling; SWI = susceptibility weighted imaging; FSPG = fast spoiled gradient echo; CUBE = General Electric name of sequence, not an acronym; GRE = gradient echo; ZIP2 = through-plane zero filling interpolation"</span>
+<span id="cb1-201"><a href=""></a></span>
+<span id="cb1-202"><a href=""></a>if (knitr::is_latex_output()) {</span>
+<span id="cb1-203"><a href=""></a>colnames(df)[1] &lt;- ""</span>
+<span id="cb1-204"><a href=""></a>df[11,] &lt;- linebreak(df[11,])</span>
+<span id="cb1-205"><a href=""></a>df |&gt;</span>
+<span id="cb1-206"><a href=""></a>  kbl(format = "latex",</span>
+<span id="cb1-207"><a href=""></a>    booktabs = TRUE,</span>
+<span id="cb1-208"><a href=""></a>    longtable = TRUE,</span>
+<span id="cb1-209"><a href=""></a>    linesep = "",</span>
+<span id="cb1-210"><a href=""></a>    align = "l",</span>
+<span id="cb1-211"><a href=""></a>    escape = FALSE) |&gt;</span>
+<span id="cb1-212"><a href=""></a>    kable_styling(font_size = 8, position = "center", latex_options = c("hold_position", "scale_down"), full_width = FALSE) |&gt;</span>
+<span id="cb1-213"><a href=""></a>    footnote(general_title = "", </span>
+<span id="cb1-214"><a href=""></a>           footnote_as_chunk = TRUE,</span>
+<span id="cb1-215"><a href=""></a>           threeparttable = TRUE,</span>
+<span id="cb1-216"><a href=""></a>           general = footnotetext) |&gt;</span>
+<span id="cb1-217"><a href=""></a>    column_spec(1, width="8em") |&gt;</span>
+<span id="cb1-218"><a href=""></a>    column_spec(4, width="9em") |&gt;</span>
+<span id="cb1-219"><a href=""></a>    column_spec(5, width="9em")</span>
+<span id="cb1-220"><a href=""></a>} else {</span>
+<span id="cb1-221"><a href=""></a>df |&gt; </span>
+<span id="cb1-222"><a href=""></a>    mutate(across(everything(), ~ str_replace_all(., "\n", "&lt;br&gt;"))) |&gt; </span>
+<span id="cb1-223"><a href=""></a>    gt(rowname_col = "Scan") |&gt; tab_footnote(footnotetext) |&gt;</span>
+<span id="cb1-224"><a href=""></a>    fmt_markdown(columns = TRUE) |&gt;</span>
+<span id="cb1-225"><a href=""></a>    tab_options(quarto.disable_processing = TRUE)</span>
+<span id="cb1-226"><a href=""></a>}</span>
+<span id="cb1-227"><a href=""></a>```</span>
+<span id="cb1-228"><a href=""></a></span>
+<span id="cb1-229"><a href=""></a>The MRI scan protocol comprised of the following sequences: a T1-weighted scan, a T2-weighted scan, a pseudo-continuous arterial spin labeling (ASL) scan, a multi-echo susceptibility-weighted imaging scan, and a diffusion-weighted imaging (DWI) spin-echo echo planar imaging (EPI) sequence. The DWI sequence was not used for the present study.</span>
+<span id="cb1-230"><a href=""></a></span>
+<span id="cb1-231"><a href=""></a>## Image analysis</span>
+<span id="cb1-232"><a href=""></a></span>
+<span id="cb1-233"><a href=""></a>The raw DICOM files acquired from the scanning procedure were converted to NIfTI (Neuroimaging Informatics Technology Initiative) format using Chris Rorden’s `dcmniix` tool. SWI magnitude data files were then used to create subject-specific brain masks that would not erode the SSS during QSM processing, an issue faced by our group in the past [@liFirstStepNeuroimaging2016]. A step-by-step summary of the pipeline used is shown in @fig-sample.</span>
+<span id="cb1-234"><a href=""></a></span>
+<span id="cb1-235"><a href=""></a>{{&lt; embed notebooks/Figures.ipynb#fig-graph &gt;}}</span>
+<span id="cb1-236"><a href=""></a></span>
+<span id="cb1-237"><a href=""></a>First, the fifth echo SWI magnitude file was processed using FSL’s (v. 6.0.7.3) [@woolrichBayesianAnalysisNeuroimaging2009] `fslroi`, `fslmaths`, and `bet` [@smithFastRobustAutomated2002] to create a preliminary brain mask, similar to our previous efforts, which does not contain the SSS. `Fslroi` was used to isolate the fifth echo of the magnitude data, which was then squared using Fslmaths and the option `-sqr`. Squaring the magnitude image was found to dramatically improve subsequent brain extraction. The resulting image was then used to create the preliminary brain mask using bet with the options `-m` and `-R`. The former flag generated a binary brain mask, while the latter performed a more robust brain centre estimation. The brain mask was then dilated by 7 voxels using `Fslmaths` and the options `-kernel boxv` and `-dilM` in order for the dilated mask to contain the SSS (along with unwanted tissue as well). This mask was then used, along with the phase images, in a MATLAB script for QSM calculation from Christian Kames [@kamesRapidTwostepDipole2018] to produce a preliminary QSM image that contained the SSS, albeit with fairly low signal-to-noise ratio and other unwanted tissue. Given the high contrast in voxel intensity between the SSS and surrounding tissue, the select by intensity tool in `FSLeyes` [@mccarthyFSLeyes2023] was then used to segment the SSS from the QSM image and create a 3D mask of the selected region. Using `fslmaths` and the options `-add` and `-bin`, the SSS mask was then combined with the original brain mask of the fifth echo. This resulted in a brain mask that contained only brain and SSS signal. Finally, this mask was used in a final QSM post-processing step to create a QSM image that includes the SSS while maintaining a high signal-to-noise ratio, making it suitable to obtain accurate susceptibility values.</span>
+<span id="cb1-238"><a href=""></a></span>
+<span id="cb1-239"><a href=""></a>STI Suite (v. 3.0) [@liIntegratedLaplacianBased2014], was used to process the final QSM images as it produced the cleanest images without eroding the SSS. The finalized brain mask and the last three echoes of the magnitude and phase images were used in STI Suite along with the following parameters: 0.9766 x 0.9766 x 1 mm^3^ voxel size, 5 ms TE1, 5.3 ms $\Delta$TE, and 77.4 ms sum TE, B0 strength = 3, and B0 direction = \[0, 0, 1\]. The 3D GRE data option was selected for the phase processing stage, and STAR-QSM was selected for the QSM stage. Finally, the \`select by intensity' tool in `FSLeyes` was then used to semi-automatically make vascular masks of the SSS and CCV from each subject’s QSM image. The vascular masks were used to calculate the mean susceptibility of each subject’s SSS and CCV from their QSM image with `fslstats`.</span>
+<span id="cb1-240"><a href=""></a></span>
+<span id="cb1-241"><a href=""></a>To isolate the paramagnetic component of subjects’ QSM data, the $\chi$-separation toolbox [@shinHseparationMagneticSusceptibility2021] from the Laboratory for Imaging Science and Technology was used. Each subject’s magnitude and phase SWI data were used along with the following parameters: 0.9766 x 0.9766 x 1 mm^3^ voxel size; TE (s) = \[0.005, 0.0102, 0.0155, 0.0207, 0.026\]; delta TE (s) = 0.0052; B0 strength = 3; B0 direction = \[0, 0, 1\]. The mean susceptibility of each subject’s SSS and CCV in their paramagnetic maps was calculated with the same vascular masks used for the QSM images. Sample images showing the magnitude, final QSM, and final paramagnetic component images are shown in @fig-sample.</span>
+<span id="cb1-242"><a href=""></a></span>
+<span id="cb1-243"><a href=""></a>{{&lt; embed notebooks/Figures.ipynb#fig-sample &gt;}}</span>
+<span id="cb1-244"><a href=""></a></span>
+<span id="cb1-245"><a href=""></a>Once the mean susceptibility values of the SSS and CCV were obtained from the subjects’ QSM images and paramagnetic maps, venous oxygen saturation (SvO~2~) was calculated with the following equation [@bergInvestigatingEffectFlow2021]:</span>
+<span id="cb1-246"><a href=""></a></span>
+<span id="cb1-247"><a href=""></a>$$</span>
+<span id="cb1-248"><a href=""></a>SvO_{2} = 1 - \frac{\Delta \chi _{blood} - (\Delta \chi _{oxy} * Hct)}{\Delta \chi _{do} * Hct}</span>
+<span id="cb1-249"><a href=""></a>$$ {#eq-svo}</span>
+<span id="cb1-250"><a href=""></a></span>
+<span id="cb1-251"><a href=""></a>where $\Delta \chi _{blood}$ is the vessel’s measured susceptibility, $\Delta \chi _{oxy}$ is the constant representing the susceptibility changes of oxygenated blood relation to water, $\Delta \chi _{do}$ is the difference in susceptibility between oxygenated and deoxygenated blood, and Hct is the subject’s hematocrit. $\Delta \chi _{oxy}$ was -0.21 \* 4$\pi$ ppm as per @portnoyHumanUmbilicalCord2018 and [@sedlacikObtainingBloodOxygenation2007], while $\Delta \chi _{do}$ was -0.03 \* 4$\pi$ ppm as per [@weisskoffMRISusceptometryImagebased1992]. Subjects’ Hct for the day of the scan was calculated using a four-parameter Weibull function with previously measured values while still in the NICU.</span>
+<span id="cb1-252"><a href=""></a></span>
+<span id="cb1-253"><a href=""></a>## Statistical analysis</span>
+<span id="cb1-254"><a href=""></a></span>
+<span id="cb1-255"><a href=""></a>Statistical analysis of the acquired data was performed using R and RStudio (v. 2023.09.1 Build 494) [@rcoreteamLanguageEnvironmentStatistical2022; @rstudioteamRStudioIntegratedDevelopment]. Mean and standard deviation values are reported for most statistics, unless specified otherwise. A paired Student's t-test was used to determine statistical significance (p \&lt;0.05) between two parameters (e.g. $\chi$ values between venous structures).</span>
+<span id="cb1-256"><a href=""></a></span>
+<span id="cb1-257"><a href=""></a>&lt;!-- the vessel-specific SvO2 values determined through QSM and those determined from the paramagnetic maps processed with $\chi$-separation. This was also performed for the raw $\chi$ values obtained through both methods. --&gt;</span>
+<span id="cb1-258"><a href=""></a></span>
+<span id="cb1-259"><a href=""></a># Results {#sec-results}</span>
+<span id="cb1-260"><a href=""></a></span>
+<span id="cb1-261"><a href=""></a>A total sample size of `r length(newdata$Subject)` infants were scanned, with a mean ($\pm$ standard deviation) gestational age of `r round(mean(newdata$GA),2)` $\pm$ `r round(sd(newdata$GA),2)` weeks and a mean birth weight of `r round(mean(newdata$BW),2)` $\pm$ `r round(sd(newdata$BW),2)` grams. A comprehensive summary of neonatal characteristics, including additional demographic and clinical data, is provided in @tbl-dem for reference.</span>
+<span id="cb1-262"><a href=""></a></span>
+<span id="cb1-263"><a href=""></a>```{r}</span>
+<span id="cb1-264"><a href=""></a>#| label: tbl-dem</span>
+<span id="cb1-265"><a href=""></a>#| tbl-cap: Demographic and clinical characteristic of the study sample.</span>
+<span id="cb1-266"><a href=""></a></span>
+<span id="cb1-267"><a href=""></a>df &lt;- data.frame(Variable = character(), "Subject" = character(), stringsAsFactors = FALSE)</span>
+<span id="cb1-268"><a href=""></a>df[1,] &lt;- c("Gestational age, weeks (mean \U00B1 SD)", paste0(rndmean(newdata$GA), " \U00B1 ", rndsd(newdata$GA)))</span>
+<span id="cb1-269"><a href=""></a>df[2,] &lt;- c("Corrected gestational age on scan day, weeks (mean \U00B1 SD) ", paste0(rndmean(newdata$CGAonScanDay), " \U00B1 ", rndsd(newdata$CGAonScanDay)))</span>
+<span id="cb1-270"><a href=""></a>df[3,] &lt;- c("Number of male neonates (\\%)", paste0(sum(newdata$Sex == "M"), " (", (round(sum(newdata$Sex == "M")/length(newdata$Sex)*100,2)), ")"))</span>
+<span id="cb1-271"><a href=""></a>df[4,] &lt;- c("Birth weight, g (mean \U00B1 SD)", paste0(rndmean(newdata$BW), " \U00B1 ", rndsd(newdata$BW)))</span>
+<span id="cb1-272"><a href=""></a>df[5,] &lt;- c("Weight on scan day, g (mean \U00B1 SD)", paste0(rndmean(newdata$Weight.on.Scan.Day..kg.*1000), " \U00B1 ", rndsd(newdata$Weight.on.Scan.Day..kg.*1000)))</span>
+<span id="cb1-273"><a href=""></a>df[6,] &lt;- c("Days spent in NICU (median, IQR)", paste0(median(newdata$Total_Days_NICU), ", ", IQR(newdata$Total_Days_NICU)))</span>
+<span id="cb1-274"><a href=""></a>df[7,] &lt;- c("Days on ventilation (median, IQR)", paste0(median(newdata$Total_Days_Ventilation), ", ", IQR(newdata$Total_Days_Ventilation)))</span>
+<span id="cb1-275"><a href=""></a>df &lt;- df |&gt; rename("Subject data (n = 19)" = Subject)</span>
+<span id="cb1-276"><a href=""></a>footnotetext="SD = standard deviation; IQR = inter quartile range"</span>
+<span id="cb1-277"><a href=""></a></span>
+<span id="cb1-278"><a href=""></a>if (knitr::is_latex_output()) {</span>
+<span id="cb1-279"><a href=""></a>df |&gt;</span>
+<span id="cb1-280"><a href=""></a>  kbl(format = "latex",</span>
+<span id="cb1-281"><a href=""></a>    booktabs = TRUE,</span>
+<span id="cb1-282"><a href=""></a>    longtable = TRUE,</span>
+<span id="cb1-283"><a href=""></a>    linesep = "",</span>
+<span id="cb1-284"><a href=""></a>    align = "lc",</span>
+<span id="cb1-285"><a href=""></a>    escape = FALSE) |&gt;</span>
+<span id="cb1-286"><a href=""></a>    kable_styling(font_size = 9, position = "center", latex_options = c("hold_position", "scale_down"), full_width = FALSE) |&gt;</span>
+<span id="cb1-287"><a href=""></a>    footnote(general_title = "", </span>
+<span id="cb1-288"><a href=""></a>           footnote_as_chunk = TRUE,</span>
+<span id="cb1-289"><a href=""></a>           threeparttable = TRUE,</span>
+<span id="cb1-290"><a href=""></a>           general = footnotetext)</span>
+<span id="cb1-291"><a href=""></a>} else {</span>
+<span id="cb1-292"><a href=""></a>df |&gt; </span>
+<span id="cb1-293"><a href=""></a>    mutate(across(everything(), ~ str_replace_all(., "\n", "&lt;br&gt;"))) |&gt; </span>
+<span id="cb1-294"><a href=""></a>    gt() |&gt; </span>
+<span id="cb1-295"><a href=""></a>    cols_align(align = "center", columns = c("Subject data (n = 19)")) |&gt;</span>
+<span id="cb1-296"><a href=""></a>    tab_footnote(footnotetext) |&gt;</span>
+<span id="cb1-297"><a href=""></a>    fmt_markdown(columns = TRUE) |&gt;</span>
+<span id="cb1-298"><a href=""></a>    tab_options(quarto.disable_processing = TRUE)</span>
+<span id="cb1-299"><a href=""></a>}</span>
+<span id="cb1-300"><a href=""></a>```</span>
+<span id="cb1-301"><a href=""></a></span>
+<span id="cb1-302"><a href=""></a>The mean SvO~2~ values for the SSS and the CCV were found to be `r rndmean(newdata$Gavin_SSSVein_CSvO2)` $\pm$ `r rndsd(newdata$Gavin_SSSVein_CSvO2)` and `r rndmean(newdata$Gavin_IntVein_CSvO2)` $\pm$  `r rndsd(newdata$Gavin_IntVein_CSvO2)` ppm, respectively, when determined from the QSM data. When determined from the paramagnetic map, the mean SvO~2~ values for the SSS and the CCV were found to be `r rndmean(newdata$Chisep_SSSVein_CSvO2)` $\pm$ `r rndsd(newdata$Chisep_IntVein_CSvO2)` %, respectively. A summary of the measured physiological parameters, including the chi values used to calculate SvO~2~, can found in @tbl-chistats.</span>
+<span id="cb1-303"><a href=""></a></span>
+<span id="cb1-304"><a href=""></a>```{r}</span>
+<span id="cb1-305"><a href=""></a>#| label: tbl-chistats</span>
+<span id="cb1-306"><a href=""></a>#| tbl-cap: Summary of acquired physiological parameters. Mean $\pm$ SD is shown for chi and SvO~2~ values. The P-value and 95% confidence interval (CI) were obtained through the comparison of values between QSM and paramagnetic maps; (n=19).</span>
+<span id="cb1-307"><a href=""></a></span>
+<span id="cb1-308"><a href=""></a>df &lt;- data.frame(Region = character(), Measure = character(), QSM = character(), pmap = character(), pvalue = character(), CI = character(), stringsAsFactors = FALSE)</span>
+<span id="cb1-309"><a href=""></a></span>
+<span id="cb1-310"><a href=""></a>df[1,] &lt;- c("SSS", "Chi (ppm)", paste0(rndmean(newdata$Gavin_SSS_Chi), " \U00B1 ", rndsd(newdata$Gavin_SSS_Chi)), paste0(rndmean(newdata$Chisep_SSS_Chi), " \U00B1 ", rndsd(newdata$Chisep_SSS_Chi)), signif(SSSChi.t$p.value,3), paste0(round(SSSChi.t$conf.low,2), ", ", round(SSSChi.t$conf.high,2)))</span>
+<span id="cb1-311"><a href=""></a>df[2,] &lt;- c("SSS", "SvO\U2082 (\\%)", paste0(rndmean(newdata$Gavin_SSSVein_CSvO2*100), " \U00B1 ", rndsd(newdata$Gavin_SSSVein_CSvO2*100)), paste0(rndmean(newdata$Chisep_SSSVein_CSvO2*100), " \U00B1 ", rndsd(newdata$Chisep_SSSVein_CSvO2*100)), signif(SSSSvO2.t$p.value,3), paste0(round(SSSSvO2.t$conf.low,2), ", ", round(SSSSvO2.t$conf.high,2)))</span>
+<span id="cb1-312"><a href=""></a>df[3,] &lt;- c("CCV", "Chi (ppm)", paste0(rndmean(newdata$Gavin_IntVein_Chi), " \U00B1 ", rndsd(newdata$Gavin_IntVein_Chi)), paste0(rndmean(newdata$Chisep_IntVein_Chi), " \U00B1 ", rndsd(newdata$Chisep_IntVein_Chi)), signif(CCVChi.t$p.value,3), paste0(round(CCVChi.t$conf.low,2), ", ", round(CCVChi.t$conf.high,2)))</span>
+<span id="cb1-313"><a href=""></a>df[4,] &lt;- c("CCV", "SvO\U2082 (\\%)", paste0(rndmean(newdata$Gavin_IntVein_CSvO2*100), " \U00B1 ", rndsd(newdata$Gavin_IntVein_CSvO2*100)), paste0(rndmean(newdata$Chisep_IntVein_CSvO2*100), " \U00B1 ", rndsd(newdata$Chisep_IntVein_CSvO2*100)), signif(CCVSvO2.t$p.value,3), paste0(round(CCVSvO2.t$conf.low,2), ", ", round(CCVSvO2.t$conf.high,2)))</span>
+<span id="cb1-314"><a href=""></a></span>
+<span id="cb1-315"><a href=""></a>df &lt;- df |&gt; rename("Paramagnetic map" = pmap, "p-value" = pvalue, "95\U0025 CI" = CI)</span>
+<span id="cb1-316"><a href=""></a></span>
+<span id="cb1-317"><a href=""></a>footnotetext="QSM = quantitative susceptibility mapping; CI = confidence interval; SSS = superior sagitall sinus; CCV = central cerebral vein"</span>
+<span id="cb1-318"><a href=""></a></span>
+<span id="cb1-319"><a href=""></a>if (knitr::is_latex_output()) {</span>
+<span id="cb1-320"><a href=""></a>df |&gt;</span>
+<span id="cb1-321"><a href=""></a>  kbl(format = "latex",</span>
+<span id="cb1-322"><a href=""></a>    booktabs = TRUE,</span>
+<span id="cb1-323"><a href=""></a>    longtable = TRUE,</span>
+<span id="cb1-324"><a href=""></a>    linesep = "",</span>
+<span id="cb1-325"><a href=""></a>    align = "llcccc",</span>
+<span id="cb1-326"><a href=""></a>    escape = FALSE) |&gt;</span>
+<span id="cb1-327"><a href=""></a>    kable_styling(font_size = 9, position = "center", latex_options = c("hold_position", "scale_down"), full_width = FALSE) |&gt;</span>
+<span id="cb1-328"><a href=""></a>    footnote(general_title = "", </span>
+<span id="cb1-329"><a href=""></a>           footnote_as_chunk = TRUE,</span>
+<span id="cb1-330"><a href=""></a>           threeparttable = TRUE,</span>
+<span id="cb1-331"><a href=""></a>           general = footnotetext)</span>
+<span id="cb1-332"><a href=""></a>} else {</span>
+<span id="cb1-333"><a href=""></a>df |&gt; </span>
+<span id="cb1-334"><a href=""></a>    mutate(across(everything(), ~ str_replace_all(., "\n", "&lt;br&gt;"))) |&gt; </span>
+<span id="cb1-335"><a href=""></a>    gt() |&gt; </span>
+<span id="cb1-336"><a href=""></a>    cols_align(align = "center", columns = c("QSM", "Paramagnetic map", "p-value", "95\U0025 CI")) |&gt;</span>
+<span id="cb1-337"><a href=""></a>    tab_footnote(footnotetext) |&gt;</span>
+<span id="cb1-338"><a href=""></a>    fmt_markdown(columns = TRUE) |&gt;</span>
+<span id="cb1-339"><a href=""></a>    tab_options(quarto.disable_processing = TRUE)</span>
+<span id="cb1-340"><a href=""></a>}</span>
+<span id="cb1-341"><a href=""></a>```</span>
+<span id="cb1-342"><a href=""></a></span>
+<span id="cb1-343"><a href=""></a>Region-specific $\chi$ and SvO~2~ values acquired from QSM were compared to values acquired from paramagnetic maps. In both the SSS and CCV, it was found that a significant difference existed between values acquired ($\chi$ and SvO~2~) from QSM and paramagnetic maps (p &lt; 0.05). A boxplot showing the comparisons made is shown in @fig-methodplot.</span>
+<span id="cb1-344"><a href=""></a></span>
+<span id="cb1-345"><a href=""></a>{{&lt; embed notebooks/gavin_thesis_markdown.qmd#fig-methodplot &gt;}}</span>
+<span id="cb1-346"><a href=""></a></span>
+<span id="cb1-347"><a href=""></a>The acquired $\chi$ and SvO~2~ values were additionally compared between veins. In data created from QSM, a significant difference was found between the CCV and SSS in mean $\chi$ (p &lt; 0.05; 95% CI [`r round(RegionQSMChi.t$conf.low,3)`, `r round(RegionQSMChi.t$conf.high,3)`]) and mean SvO~2~ (p &lt; 0.05; 95% CI [`r round(RegionQSMSvO2.t$conf.low,3)`, `r round(RegionQSMSvO2.t$conf.high,3)`]). In data acquired from paramagnetic maps, no significant difference was observed between the CCV and the SSS in either mean $\chi$ (p = `r round(RegionChisepChi.t$p.value,3)`; 95% CI [`r round(RegionChisepChi.t$conf.low,3)`, `r round(RegionChisepChi.t$conf.high,3)`]) or mean SvO~2~ (p = `r round(RegionChisepSvO2.t$p.value,3)`; 95% CI [`r round(RegionChisepSvO2.t$conf.low,3)`, `r round(RegionChisepChi.t$conf.high,3)`]). A summary of these comparisons is represented in @fig-regionplot.</span>
+<span id="cb1-348"><a href=""></a></span>
+<span id="cb1-349"><a href=""></a>{{&lt; embed notebooks/gavin_thesis_markdown.qmd#fig-regionplot &gt;}}</span>
+<span id="cb1-350"><a href=""></a></span>
+<span id="cb1-351"><a href=""></a># Discussion {#sec-discussion}</span>
+<span id="cb1-352"><a href=""></a></span>
+<span id="cb1-353"><a href=""></a>The primary objective of the present study was to assess whether the application of magnetic susceptibility separation to neonatal QSM data could provide more accurate cerebral venous vessel oxygenation measurements. To the best of our knowledge, we are the first to test this in a neonatal cohort, as susceptibility separation has been typically evaluated as a method of imaging myelin and brain iron in adult subjects [@shinHseparationMagneticSusceptibility2021; @ahmedDiamagneticComponentMap2023a]. Our results showed that the SvO~2~ values of the SSS and CCV obtained from susceptibility separation are significantly lower than the respective SvO~2~ values obtained from QSM alone. When our results were compared to the literature, we found that our SSS SvO~2~ data from susceptibility separation agreed well with the findings of other studies measuring SvO~2~ of the SSS in similar subject populations. Conversely, the paramagnetic CCV SvO~2~ data saw less agreement with the existing literature than the corresponding data from QSM. However, there is reason to believe our paramagnetic CCV values may be accurate given their similarity to the paramagnetic SSS values and the limitations of the two studies that observed CCV SvO~2~.  Additionally, it is important to note that our SvO~2~ measurements from susceptibility separation had greater variance than our measurements from QSM, indicating a limitation that should be addressed in future research. Overall, the present work demonstrates the promise of susceptibility separation as an MRI post-processing technique that can measure the oxygenation of the cerebral veins of infant subjects, a useful marker of regional oxygen consumption in the brain. </span>
+<span id="cb1-354"><a href=""></a></span>
+<span id="cb1-355"><a href=""></a></span>
+<span id="cb1-356"><a href=""></a># Conclusion {#sec-conclusion}</span>
+<span id="cb1-357"><a href=""></a></span>
+<span id="cb1-358"><a href=""></a># References {.unnumbered}</span>
+<span id="cb1-359"><a href=""></a></span>
+<span id="cb1-360"><a href=""></a>::: {#refs}</span>
+<span id="cb1-361"><a href=""></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><object data="gavinexample.pdf" type="application/pdf" width="100%" height="800"><a href="gavinexample.pdf" download="">Download PDF file.</a></object></p>
+</div>
+</div>
+</section>
+<section id="what-are-some-other-benefits" class="slide level2">
+<h2>What are some other benefits?</h2>
+<ul>
+<li class="fragment">Already mentioned:
+<ul>
+<li class="fragment">reducing <strong>errors</strong> from copy-pasting results to paper</li>
+<li class="fragment">anyone can see how I obtained my results or figures by <strong>reviewing my code</strong> (bonus: learn how others made their figures!)</li>
+</ul></li>
+<li class="fragment">Easy to restructure, rewrite, revise:
+<ul>
+<li class="fragment">no need to tweak reported values, tables, or figures by hand</li>
+<li class="fragment">remove barrier to re-running analyses (thanks to Reviewer #2); speed up resubmission</li>
+</ul></li>
 </ul>
 </section>
-<section id="going-to-sleep" class="slide level2">
-<h2>Going to sleep</h2>
+<section id="what-are-some-other-benefits-1" class="slide level2">
+<h2>What are some other benefits?</h2>
 <ul>
-<li class="fragment">Get in bed</li>
-<li class="fragment">Count sheep</li>
+<li class="fragment">easy cross-referencing and citations</li>
+<li class="fragment">allow for more rigorous meta-analyses studies to be performed (raw-data)</li>
+<li class="fragment">be authored in your favorite code editor</li>
+<li class="fragment">render from qmd to PDF, Word, HTML, <span class="math inline">\(\LaTeX{}\)</span>, etc.</li>
+<li class="fragment">execute code in R, Python, Julia, and more</li>
+<li class="fragment">apply journal styles to your outputs with Quarto extensions</li>
+<li class="fragment">publish to Github Pages, Netlify, and more</li>
 </ul>
+</section></section>
+<section>
+<section id="notebooks-an-aside" class="title-slide slide level1 center">
+<h1>Notebooks: an Aside</h1>
+
+</section>
+<section id="aside-what-is-a-notebook" class="slide level2">
+<h2>Aside: What is a notebook?</h2>
+<p>A notebook is a document that contains both <strong>code</strong> and <strong>narrative</strong>:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment">Jupyter notebooks (.ipynb)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="img/jupyternotebook.png" class="fragment"></p>
+</div>
+</div>
+<p><img data-src="img/jupy.png" class="fragment absolute" style="top: 300px; left: 100px; width: 350px; "></p>
+</section>
+<section id="aside-what-is-a-notebook-1" class="slide level2">
+<h2>Aside: What is a notebook?</h2>
+<p>A notebook is a document that contains both <strong>code</strong> and <strong>narrative</strong>:</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div>
+<ul>
+<li>Rmarkdown (.rmd)</li>
+</ul>
+</div>
+</div><div class="column" style="width:60%;">
+<p><img data-src="img/rmarkdownexample.png" class="fragment"></p>
+</div>
+</div>
+<p><img data-src="img/rlogo.png" class="fragment absolute" style="top: 300px; left: 100px; width: 250px; "></p>
+</section>
+<section id="aside-what-is-a-notebook-2" class="slide level2">
+<h2>Aside: What is a notebook?</h2>
+<p>A notebook is a document that contains both <strong>code</strong> and <strong>narrative</strong>:</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div>
+<ul>
+<li>Quarto document (.qmd)</li>
+</ul>
+</div>
+</div><div class="column" style="width:60%;">
+<p><img data-src="img/quartopenguins.png" class="fragment"></p>
+</div>
+</div>
+<p><img data-src="img/quartologo.png" class="fragment absolute" style="top: 350px; left: 50px; width: 350px; "></p>
+</section>
+<section id="aside-what-are-notebooks-good-for" class="slide level2">
+<h2>Aside: What are notebooks good for?</h2>
+<ul>
+<li class="fragment"><p>By combining narrative with code, researchers can share and explain what they did, how they did it, and why they did it.</p></li>
+<li class="fragment"><p>Kind of like a research paper but with all the data, stats and computation baked in.</p></li>
+<li class="fragment"><p>Great for teaching, communicating, and/or collaborating: where you can directly see what someone did, with helpful explanations along the way.</p></li>
+</ul>
+</section>
+<section id="aside-quick-intro-to-r-markdown" class="slide level2">
+<h2>Aside: Quick intro to R Markdown</h2>
+<p>Some markdown syntax</p>
+
+<img data-src="img/markdown_ex.png" class="r-stretch"></section>
+<section id="aside-quick-intro-to-r-markdown-1" class="slide level2">
+<h2>Aside: Quick intro to R Markdown</h2>
+<p>Markdown with evaluated code</p>
+
+<img data-src="img/rcode_ex.png" class="r-stretch"></section>
+<section id="aside-quick-intro-to-r-markdown-2" class="slide level2">
+<h2>Aside: Quick intro to R Markdown</h2>
+<p>You can also include code inline (mixed in with the markdown text)</p>
+
+<img data-src="img/inlinecode_ex.png" class="r-stretch"></section></section>
+<section>
+<section id="simple-demonstration-with-quarto" class="title-slide slide level1 center">
+<h1>Simple Demonstration with Quarto</h1>
+
+</section>
+<section id="lets-write-a-manuscript" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<ul>
+<li class="fragment"><p>First, install quarto <a href="https://quarto.org/docs/download/prerelease.html" class="uri">https://quarto.org/docs/download/prerelease.html</a></p></li>
+<li class="fragment"><p>Approach 1: Start from scratch</p>
+<ul>
+<li class="fragment">Creating a Quarto manuscript
+<ul>
+<li class="fragment">RStudio: New Project &gt; New Directory &gt; Quarto Manuscript</li>
+<li class="fragment"><code>quarto create project manuscript &lt;name&gt;</code></li>
+</ul></li>
+<li class="fragment">Add manuscript content</li>
+</ul></li>
+<li class="fragment"><p>Approach 2: Start with a sample from <a href="https://quarto.org/docs/manuscripts" class="uri">https://quarto.org/docs/manuscripts</a></p></li>
+</ul>
+</section>
+<section id="lets-write-a-manuscript-1" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<ul>
+<li class="fragment"><p>We will first need to decide what tool we will use: <img data-src="img/editors.png"></p></li>
+<li class="fragment"><p>Today I will use RStudio as an example</p></li>
+</ul>
+</section>
+<section id="lets-write-a-manuscript-2" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<ul>
+<li class="fragment">Clone the Template Repository
+<ul>
+<li class="fragment">Head to <a href="https://github.com/quarto-ext/manuscript-template-rstudio/generate" class="uri">https://github.com/quarto-ext/manuscript-template-rstudio/generate</a> <img data-src="img/github_repo.png"></li>
+</ul></li>
+</ul>
+</section>
+<section id="lets-write-a-manuscript-3" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<ul>
+<li class="fragment">Once your repository is created, clone it to your local computer.</li>
+<li class="fragment">In RStudio, you can do: <strong>File</strong> &gt; <strong>New Project</strong>.</li>
+<li class="fragment">In the <strong>New Project</strong> dialog, select <strong>From Version Control</strong>, then <strong>Git</strong>, and copy and paste the repo URL from GitHub. <img data-src="img/rstudio_git_manuscript.png"></li>
+</ul>
+</section>
+<section id="lets-write-a-manuscript-4" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<p><strong>Project Files:</strong></p>
+<ul>
+<li class="fragment">A notebook file where you write your article: <code>index.qmd</code>. This file contains:
+<ul>
+<li class="fragment">document metadata, including article front matter (authors, affiliations, etc.) and Quarto options,</li>
+<li class="fragment">the article body, written using special Quarto markdown syntax that allows you to add things like cross references and citations, and</li>
+<li class="fragment">optionally, code, where you control if, or how, the code and its output appear in the article.</li>
+</ul></li>
+<li class="fragment">A configuration file <code>_quarto.yml</code> that identifies the project as a Quarto manuscript and controls how your manuscript is put together.</li>
+</ul>
+</section>
+<section id="lets-write-a-manuscript-5" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<p><strong>Workflow</strong></p>
+<ul>
+<li class="fragment"><p>The basic workflow for writing a manuscript in Quarto is to make changes to your article content in index.qmd, preview the changes with Quarto, and repeat.</p></li>
+<li class="fragment"><p>Render and preview the manuscript by hitting the <strong>Render </strong> button located in the menu bar of the editor: <img data-src="img/renderbutton.png"></p></li>
+</ul>
+</section>
+<section id="lets-write-a-manuscript-6" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<p>You’ll see some output from Quarto in the Background Jobs pane and then a live preview will appear in the Viewer pane.</p>
+
+<img data-src="img/quartopreview.png" class="r-stretch"></section>
+<section id="lets-write-a-manuscript-7" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<p><strong>Notebook Structure</strong></p>
+<p>The file <code>index.qmd</code> is a Quarto markdown file. It contains three types of content:</p>
+<ul>
+<li class="fragment"><p>Starts with a YAML header, used to set document metadata, including scholarly front matter. The YAML header starts and ends with a line of three dashes (<code>---</code>)</p></li>
+<li class="fragment"><p>May include executable code chunks: start with three backticks followed by the code language in curly braces (e.g.&nbsp;<code>```{r}</code> or {<code>```{python}</code>).</p></li>
+<li class="fragment"><p>The rest of the document interpreted as Quarto specific markdown, allowing you to include figures, tables, equations, cross references and citations.</p></li>
+</ul>
+</section>
+<section id="lets-write-a-manuscript-8" class="slide level2">
+<h2>Let’s write a manuscript</h2>
+<p>Open RStudio</p>
+</section></section>
+<section id="real-life-demonstration" class="title-slide slide level1 center">
+<h1>Real life demonstration</h1>
+
+</section>
+
+<section>
+<section id="criticisms" class="title-slide slide level1 center">
+<h1>Criticisms</h1>
+
+</section>
+<section id="what-are-some-barriers" class="slide level2">
+<h2>What are some barriers?</h2>
+<ul>
+<li class="fragment">Conversion to different outputs is not always straightforward, and sometimes may not be possible to replicate what you want</li>
+<li class="fragment">Steep learning curve</li>
+<li class="fragment">No career incentive to try this new approach</li>
+<li class="fragment">Slow to preview/render</li>
+<li class="fragment">Errors/bugs can be frustrating</li>
+</ul>
+</section>
+<section id="what-are-some-criticisms" class="slide level2">
+<h2>What are some criticisms?</h2>
+<ul>
+<li class="fragment">“But people will take my analysis, run it another way, and say my results aren’t valid”</li>
+<li class="fragment">“This looks hard, I don’t want to have to learn <em>another</em> new thing”</li>
+</ul>
+</section></section>
+<section id="summary" class="title-slide slide level1 center">
+<h1>Summary</h1>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
+
+<section id="footnotes" class="footnotes footnotes-end-of-document smaller scrollable" role="doc-endnotes"><h2>Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Ioannidis JPA (2005) Why most published research findings are false. PLoS Med 2(8): e124.</p></li>
+<li id="fn2"><p>Open Science Collaboration. Estimating the reproducibility of psychological science. Science 349, aac4716 (2015).</p></li>
+<li id="fn3"><p>Farrar, B. G., Boeckle, M. &amp; Clayton, N. S. Replications in comparative cognition: what should we expect and how can we improve? Anim. Behav. Cognit. 7, 1 (2020).</p></li>
+<li id="fn4"><p>Errington, T. M. et al.&nbsp;Investigating the replicability of preclinical cancer biology. Elife 10, e71601 (2021).</p></li>
+<li id="fn5"><p>Camerer, C. F. et al.&nbsp;Evaluating replicability of laboratory experiments in economics. Science 351, 1433–1436 (2016).</p></li>
+<li id="fn6"><p>Begley CG, Ellis LM (2012) Drug development: Raise standards for preclinical cancer research. Nature 483: 531–533. doi: 10.1038/483531a PMID: 22460880</p></li>
+<li id="fn7"><p>K.S. Button, J.P.A. Ioannidis, C. Mokrysz, B.A. Nosek, J. Flint, E.S.J. Robinson, M.R. Munafò. Power failure: Why small sample size undermines the reliability of neuroscience. Nat Rev Neurosci, 14 (2013), pp.&nbsp;365-376</p></li>
+<li id="fn8"><p>Marek, S., Tervo-Clemmens, B., Calabro, F.J. et al.&nbsp;Reproducible brain-wide association studies require thousands of individuals. Nature 603, 654–660 (2022). https://doi.org/10.1038/s41586-022-04492-9</p></li>
+<li id="fn9"><p>Carlisle, J. B. Anaesthesia 76, 472–479 (2021).</p></li>
+<li id="fn10"><p>C. Piller. Disgraced COVID-19 studies are still routinely cited. Science, 371 (2021), pp.&nbsp;331-332; E.M. Bucci. On zombie papers. Cell Death Dis, 10 (2019), p.&nbsp;189; S.B. Nissen, T. Magidson, K. Gross, C.T. Bergstrom. Publication bias and the canonization of false facts. eLife, 5 (2016), Article e21451</p></li>
+<li id="fn11"><p>Nuijten, Michèle B, Chris HJ Hartgerink, Marcel ALM van Assen, Sacha Epskamp, and Jelte M Wicherts. 2016. “The Prevalence of Statistical Reporting Errors in Psychology (1985–2013).” Behavior Research Methods 48 (4). Springer: 1205–26.</p></li>
+<li id="fn12"><p>T.E. Hardwicke, M. Bohn, K. MacDonald, E. Hembacher, M.B. Nuijten, B.N. Peloquin, et al.&nbsp;Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: An observational study. R Soc Open Sci, 8 (2021), Article 201494</p></li>
+</ol>
+</section>
     </div>
   </div>
 
@@ -575,9 +1404,9 @@ Alexander Mark Weber
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1024,
 
-        height: 700,
+        height: 768,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -609,6 +1438,44 @@ Alexander Mark Weber
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

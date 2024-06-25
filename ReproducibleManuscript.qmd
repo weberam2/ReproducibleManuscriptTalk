@@ -4,11 +4,29 @@ author: "Alexander Mark Weber"
 format:
   revealjs:
     incremental: true
+    reference-location: document
+    width: 1024
+    height: 768
+    code-block-height: 768px
+htmllink: https://www.mentimeter.com/app/presentation/alhxhotzzgd4mi8ai93m1xmvebrziidm/embed
 ---
+
+## Notes {visibility="hidden"}
+
+<!-- Use menti on your phone to activate links -->
+<!-- https://www.mentimeter.com/ -->
 
 # Bridge-In
 
-## Scientific Method {.smaller}
+## Mentimeter {background-iframe='{{< meta htmllink >}}'}
+
+<!-- {{< placeholder >}} -->
+
+## Scientific Method {background-iframe='{{< meta htmllink >}}'}
+
+<!-- {{< placeholder >}} -->
+
+## Scientific Method {auto-animate=true .smaller}
 
 What is the scientific method (broadly)?
 
@@ -18,34 +36,355 @@ What is the scientific method (broadly)?
 4. Test the hypothesis by performing an experiment and collecting data in a reproducible manner
 5. Analyze the data
 6. Interpret the data and draw conclusions that serve as a starting point for a new hypothesis
-7. Publish results
-
-::: {.fragment .highlight-red}
-8. Retest (frequently done by other scientists)
-:::
+7. <p style="color:red;">Publish results</p>
+8. <p style="color:red;">Retest (frequently done by other scientists)</p> 
 
 ::: {.notes}
 
+:::
+
+## Scientific Method {auto-animate=true}
+
+::: {.nonincremental style="margin-top: 150px; font-size: 1.5em; color: red;"}
+7. Publish Results
+8. Retest (frequently done by other scientists)
+:::
+
+## Problem 
+- In 2011, John Ioannidis^[Ioannidis JPA (2005) Why most published
+research findings are false. PLoS Med 2(8): e124.]
+ published 
+![](img/IoannidisPaper.png)
+- Why?
+  - Studies are underpowered
+  - Current incentives lead scientists to publish quantity over quality
+  - No incentives for scientists to replicate other studies
+  - More...
+
+::: {.notes}
+John suggested that the majority of all published papers at the time were likely not true. Or put another way, wouldn't be reproduced
+:::
+## Problem
+
+Was he right?
+
+- In 2015, the Open Science Collaboration sampled studies from prominent journals to estimate the replicability of psychological research.^[Open Science Collaboration. Estimating the reproducibility of psychological science. Science 349, aac4716 (2015).]
+
+## Problem {background-iframe='{{< meta htmllink >}}'}
+
+<!-- {{< placeholder >}} -->
+
+## Problem {.nonincremental}
+
+```{r}
+#| label: fig-opensci
+
+# Load ggplot2
+library(ggplot2)
+library(tidyverse)
+
+# Create Data
+data <- data.frame(
+  group=c("Successful", "Unsuccessful"),
+  value=c(39,61)
+)
+
+data <- data |>
+  arrange(desc(group)) |>
+  mutate(prop = value / sum(data$value) *100) |>
+  mutate(ypos = cumsum(prop)- 0.5*prop )
+
+# Basic piechart
+ggplot(data, aes(x="", y=value, fill=group)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) + theme_void() +
+  theme(legend.text = element_text(size=18), legend.title = element_blank())+
+
+  geom_text(aes(y = ypos, label = value), color = "white", size=6) +
+  scale_fill_brewer(palette="Set1")
+
+```
+
+::: {.notes}
+[https://www.nature.com/articles/s44271-023-00003-2]
+
+Out of 100 independently performed replications, only 39% were subjectively labelled as successful replications, and on average, the effects were roughly half the original size
+:::
+
+## Problem 
+
+Not just in Psychology: 
+
+- animal behaviour^[Farrar, B. G., Boeckle, M. & Clayton, N. S. Replications in comparative cognition: what should we expect and how can we improve? Anim. Behav. Cognit. 7, 1 (2020).]; 
+- cancer biology^[Errington, T. M. et al. Investigating the replicability of preclinical cancer biology. Elife 10, e71601 (2021).]; 
+- economics^[Camerer, C. F. et al. Evaluating replicability of laboratory experiments in economics. Science 351, 1433–1436 (2016).]
+- pharmaceutical industry^[Begley CG, Ellis LM (2012) Drug development: Raise standards for preclinical cancer research. Nature
+483: 531–533. doi: 10.1038/483531a PMID: 22460880]
+- neuroscience^[K.S. Button, J.P.A. Ioannidis, C. Mokrysz, B.A. Nosek, J. Flint, E.S.J. Robinson, M.R. Munafò. Power failure: Why small sample size undermines the reliability of neuroscience. Nat Rev Neurosci, 14 (2013), pp. 365-376]
+- neuroimaging^[Marek, S., Tervo-Clemmens, B., Calabro, F.J. et al. Reproducible brain-wide association studies require thousands of individuals. Nature 603, 654–660 (2022). https://doi.org/10.1038/s41586-022-04492-9]
+- clinical trials^[Carlisle, J. B. Anaesthesia 76, 472–479 (2021).]
+
+::: {.notes}
 :::
 
 ## Problem
 
+- For clinical trials: 44% contained at least some flawed data: 
+  - impossible statistics, 
+  - incorrect calculations, 
+  - or duplicated numbers or figures
+
+- Publishing irreproducible results is worse than not publishing: more difficult to eliminate an idea than it is to introduce it^[C. Piller. Disgraced COVID-19 studies are still routinely cited. Science, 371 (2021), pp. 331-332; E.M. Bucci. On zombie papers. Cell Death Dis, 10 (2019), p. 189; S.B. Nissen, T. Magidson, K. Gross, C.T. Bergstrom. Publication bias and the canonization of false facts. eLife, 5 (2016), Article e21451] 
+
+- Spurious results can mislead other researchers who conduct follow-up investigations or try to integrate findings into broader theories.
+
 ::: {.notes}
-[https://www.nature.com/articles/s44271-023-00003-2]
+For the clinical trials; for more than 150 trials, the author of the paper got access to anonymized individual participant data (IPD). By studying the IPD spreadsheets, he judged that 44% of these trials contained at least some flawed data: impossible statistics, incorrect calculations or duplicated numbers or figures, for instance. And 26% of the papers had problems that were so widespread that the trial was impossible to trust, he judged — either because the authors were incompetent, or because they had faked the data.
 :::
+
+
+## What Can We Do? 
+
+- Many solutions are needed; far outside the scope of this talk
+
+- **One thing we can do is change the way we write papers.** ![](img/worddoc.png){width=55% height=55%}
+
+- Currently, papers are written and published in a way that results in **errors** and the inability to **computationally reproduce** results.
+
+## What Can We Do?
+
+- **Errors**: a 2016 paper by Nuijten et al.^[Nuijten, Michèle B, Chris HJ Hartgerink, Marcel ALM van Assen, Sacha Epskamp, and Jelte M Wicherts. 2016. “The Prevalence of Statistical Reporting Errors in Psychology (1985–2013).” Behavior Research Methods 48 (4). Springer: 1205–26.] found that 
+  - nearly **half** of all papers had errors in them;
+  - over **10%** of p-values in published papers were inconsistent with the reported details of the statistical test
+  - 1.6% were what they called "grossly" inconsistent, e.g. difference between the p-value and the test statistic meant that one implied statistical significance and the other did not
+
+## What Can We Do?
+
+- **Computational reproducibility**: a 2021 paper by Hardwicke et al.^[T.E. Hardwicke, M. Bohn, K. MacDonald, E. Hembacher, M.B. Nuijten, B.N. Peloquin, et al. Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: An observational study. R Soc Open Sci, 8 (2021), Article 201494] attempted to reproduce results from 25 published papers that publicly shared their data and code:
+  - found substantial numerical discrepancies between reported statistical values and values obtained from reproduction attempts in **64%** of these papers
+
+## What Can We Do?
+
+This is where **Reproducible Papers** come in...
+
+![](img/reprocpaper_example.png)
 
 # Introduction
 
 ## What is a reproducible manuscript?
 
+::: {.columns}
+::: {.column width="70%"}
 - Reports the scientific findings
 - Provides all (or almost all) the necessary data, code, and methodologies required to create those findings (i.e. data, stats, figures, tables, etc.)
 - Transparent and organized
-- Enables others to *replicate* and *verify* the results of your study independently
+- Enables others to **replicate** and **verify** the results of your study independently
+:::
+::: {.column width="30%"}
+![](img/qmark.png)
+:::
+:::
 
+## What does it look like? {.smaller}
+::: {.columns}
+::: {.column width="50%"}
+```{qmd}
+#| echo: true
+#| eval: false
+#| file: ~/Dropbox/AssistantProf_BCCHRI/Projects/Gavin_CSVO2/Quarto_Chisep_CSVO2_Manuscript/index.qmd
+```
+:::
+::: {.column width="50%"}
+{{< pdf gavinexample.pdf width=100% height=800 >}}
+:::
+:::
 
+## What are some other benefits?
 
-|               | Column2        | Column3        |
-| ------------- | -------------- | -------------- |
-| Item1         | Item1          | Item1          |
+- Already mentioned:
+  - reducing **errors** from copy-pasting results to paper
+  - anyone can see how I obtained my results or figures by **reviewing my code** (bonus: learn how others made their figures!)
+- Easy to restructure, rewrite, revise:
+  - no need to tweak reported values, tables, or figures by hand
+  - remove barrier to re-running analyses (thanks to Reviewer #2); speed up resubmission
 
+## What are some other benefits?
+
+- easy cross-referencing and citations
+- allow for more rigorous meta-analyses studies to be performed (raw-data)
+- be authored in your favorite code editor
+- render from qmd to PDF, Word, HTML, $\LaTeX{}$, etc.
+- execute code in R, Python, Julia, and more
+- apply journal styles to your outputs with Quarto extensions
+- publish to Github Pages, Netlify, and more
+
+# Notebooks: an Aside
+
+## Aside: What is a notebook?
+
+A notebook is a document that contains both **code** and **narrative**:
+
+::: {.columns}
+::: {.column width="50%"}
+- Jupyter notebooks (.ipynb)
+:::
+::: {.column width="50%"}
+
+![](img/jupyternotebook.png){.fragment}
+:::
+:::
+
+![](img/jupy.png){.fragment .absolute top=300 left=100 width="350"}
+
+## Aside: What is a notebook?
+
+A notebook is a document that contains both **code** and **narrative**:
+
+::: {.columns}
+::: {.column width="40%"}
+::: {.nonincremental}
+- Rmarkdown (.rmd)
+:::
+:::
+::: {.column width="60%"}
+![](img/rmarkdownexample.png){.fragment}
+:::
+:::
+
+![](img/rlogo.png){.fragment .absolute top=300 left=100 width="250"}
+
+## Aside: What is a notebook?
+
+A notebook is a document that contains both **code** and **narrative**:
+
+::: {.columns}
+::: {.column width="40%"}
+::: {.nonincremental}
+- Quarto document (.qmd)
+:::
+:::
+::: {.column width="60%"}
+![](img/quartopenguins.png){.fragment}
+:::
+:::
+
+![](img/quartologo.png){.fragment .absolute top=350 left=50 width="350"}
+
+## Aside: What are notebooks good for?
+
+- By combining narrative with code, researchers can share and explain what they did, how they did it, and why they did it.
+
+- Kind of like a research paper but with all the data, stats and computation baked in.
+
+- Great for teaching, communicating, and/or collaborating: where you can directly see what someone did, with helpful explanations along the way.
+
+## Aside: Quick intro to R Markdown
+
+Some markdown syntax
+
+![](img/markdown_ex.png)
+
+## Aside: Quick intro to R Markdown
+
+Markdown with evaluated code
+
+![](img/rcode_ex.png)
+
+## Aside: Quick intro to R Markdown
+
+You can also include code inline (mixed in with the markdown text)
+
+![](img/inlinecode_ex.png)
+
+# Simple Demonstration with Quarto
+
+## Let's write a manuscript
+
+- First, install quarto <https://quarto.org/docs/download/prerelease.html>
+
+- Approach 1: Start from scratch
+  - Creating a Quarto manuscript
+    - RStudio: New Project > New Directory > Quarto Manuscript
+    - `quarto create project manuscript <name>`
+  - Add manuscript content
+- Approach 2: Start with a sample from <https://quarto.org/docs/manuscripts>
+
+## Let's write a manuscript
+
+- We will first need to decide what tool we will use:
+![](img/editors.png)
+
+- Today I will use RStudio as an example
+
+## Let's write a manuscript
+
+- Clone the Template Repository
+  - Head to <https://github.com/quarto-ext/manuscript-template-rstudio/generate>
+![](img/github_repo.png)
+
+## Let's write a manuscript
+
+- Once your repository is created, clone it to your local computer.
+- In RStudio, you can do: **File** > **New Project**. 
+- In the **New Project** dialog, select **From Version Control**, then **Git**, and copy and paste the repo URL from GitHub.
+![](img/rstudio_git_manuscript.png)
+
+## Let's write a manuscript
+
+**Project Files:**
+
+- A notebook file where you write your article: `index.qmd`. This file contains:
+  - document metadata, including article front matter (authors, affiliations, etc.) and Quarto options,
+  - the article body, written using special Quarto markdown syntax that allows you to add things like cross references and citations, and
+  - optionally, code, where you control if, or how, the code and its output appear in the article.
+- A configuration file `_quarto.yml` that identifies the project as a Quarto manuscript and controls how your manuscript is put together.
+
+## Let's write a manuscript
+
+**Workflow**
+
+- The basic workflow for writing a manuscript in Quarto is to make changes to your article content in index.qmd, preview the changes with Quarto, and repeat.
+
+- Render and preview the manuscript by hitting the **Render ** button located in the menu bar of the editor:
+![](img/renderbutton.png)
+
+## Let's write a manuscript
+
+You’ll see some output from Quarto in the Background Jobs pane and then a live preview will appear in the Viewer pane.
+
+![](img/quartopreview.png)
+
+## Let's write a manuscript
+
+**Notebook Structure**
+
+The file `index.qmd` is a Quarto markdown file. It contains three types of content:
+
+- Starts with a YAML header, used to set document metadata, including scholarly front matter. The YAML header starts and ends with a line of three dashes (`---`)
+
+- May include executable code chunks: start with three backticks followed by the code language in curly braces (e.g. <code>&#96;&#96;&#96;{r}</code> or {<code>&#96;&#96;&#96;{python}</code>). 
+
+- The rest of the document interpreted as Quarto specific markdown, allowing you to include figures, tables, equations, cross references and citations.
+
+## Let's write a manuscript
+
+Open RStudio
+
+# Real life demonstration
+
+# Criticisms
+
+## What are some barriers?
+
+- Conversion to different outputs is not always straightforward, and sometimes may not be possible to replicate what you want
+- Steep learning curve
+- No career incentive to try this new approach
+- Slow to preview/render
+- Errors/bugs can be frustrating
+
+## What are some criticisms?
+
+- "But people will take my analysis, run it another way, and say my results aren't valid"
+- "This looks hard, I don't want to have to learn *another* new thing"
+
+# Summary
