@@ -1039,5 +1039,7 @@ Open RStudio
 
 {{< fa link >}} <>
 
+{{< fa envelope >}} [aweber@bcchr.ca](mailto:aweber@bcchr.ca)
+
 
 
