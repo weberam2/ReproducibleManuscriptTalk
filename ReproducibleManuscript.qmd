@@ -169,6 +169,18 @@ This is where **Reproducible Papers** come in...
 
 ![](img/reprocpaper_example.png)
 
+# Learning Goals
+
+## Learning Goals
+
+By the end of the talk, the audience should:
+- Know what a reproducible manuscript is,
+- Understand some reasons why scientists should be writing their manuscripts this way,
+- Know what Markdown, Knitr, Pandoc, LaTeX, Jupyter Notebook, R/RMarkdown, and Quarto are,
+- Know the basics of the syntax for Markdown, R and Quarto are,
+- See how to integrate author information, code, equations, tables, images, and citations
+- Be able to start writing your next manuscript using Quarto Manuscripts, and convert to any format you wish (html, pdf, docx), including converting to paper-specific formatting.
+
 # Introduction
 
 ## What is a reproducible manuscript?
@@ -296,6 +308,256 @@ You can also include code inline (mixed in with the markdown text)
 
 ![](img/inlinecode_ex.png)
 
+# Overview of Quarto Manuscript
+
+## Project Files
+
+- `index.qmd`: a notebook file where you write your article. This file contains:
+  - document metadata, including article front matter (authors, affiliations, etc.) and Quarto options,
+  - the article body, written using special Quarto markdown syntax that allows you to add things like cross references and citations, and
+  - optionally, code, where you control if, or how, the code and its output appear in the article.
+
+## Project Files
+
+- `_quarto.yml`: a configuration file that identifies the project as a Quarto manuscript and controls how your manuscript is put together.
+
+. . .
+
+```
+project:
+  type: manuscript
+
+execute:
+  freeze: auto
+
+format:
+  html:
+    toc: true
+    comments:
+      hypothesis: true
+  docx: default
+  jats: default
+  nature-pdf:
+    journal: "sn-nature"
+    keep_tex: true
+```
+
+
+## index.qmd
+
+The file `index.qmd` is a Quarto markdown file. It contains three types of content:
+
+- Starts with a YAML header, used to set document metadata, including scholarly front matter. The YAML header starts and ends with a line of three dashes (`---`)
+
+## index.qmd
+
+YAML header:
+
+``` yaml
+---
+title: La Palma Earthquakes
+author:
+  - name: Steve Purves
+    orcid: 0000-0002-0760-5497
+    corresponding: true
+    email: steve@curvenote.com
+    roles:
+      - Investigation
+      - Project administration
+      - Software
+      - Visualization
+    affiliations:
+      - Curvenote
+  - name: Rowan Cockett
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - Curvenote
+license: CC BY-SA 4.0
+keywords:
+  - La Palma
+  - Earthquakes
+date: '2022-05-11'
+abstract: |
+  In September 2021, a significant jump in seismic activity on the island of La Palma (Canary Islands, Spain) signaled the start of a volcanic crisis that still continues at the time of writing. Earthquake data is continually collected and published by the Instituto Geográphico Nacional (IGN). We have created an accessible dataset from this and completed preliminary data analysis which shows seismicity originating at two distinct depths, consistent with the model of a two reservoir system feeding the currently very active volcano.
+keypoints:
+  - You may specify 1 to 3 keypoints for this PDF template
+  - These keypoints are complete sentences and less than or equal to 140 characters
+  - 'They are specific to this PDF template, so they will not appear in other exports'
+citation:
+  container-title: Notebooks Now!
+draft: false
+bibliography: references.bib
+echo: false
+---
+```
+
+## index.qmd
+
+- `index.qmd` body may include executable code chunks: start with three backticks followed by the code language in curly braces (e.g. `` ```{r} `` or `` ```{python} ``). 
+
+- The rest of the document interpreted as Quarto specific markdown, allowing you to include figures, tables, equations, cross references and citations.
+
+## figures
+
+`![Elephant](/path/to/elephant.png){fig-elephant}`
+
+- Can be cross referenced with `@fig-elephant` in the document
+
+. . .
+
+![An elephant](img/elephant.png){width="400" fig-align="left"}
+
+
+## figures
+
+- Can also be created using `R` or `Python`
+
+. . .
+
+~~~
+```python
+#| label: fig-plot
+#| fig-cap: "Plot"
+import matplotlib.pyplot as plt
+plt.plot([1,23,2,4])
+plt.show()
+```
+For example, see @fig-plot.
+~~~
+
+
+![](img/python.png){width="600" fig-align="left"}
+
+## figures
+
+- Can also embed from a `.qmd` or `.ipynb` file: <br>
+`{{< embed mycode.ipynb#fig-plot >}}`
+
+- Which itself contains something like: 
+
+. . .
+
+~~~
+```python
+#| label: fig-plot
+#| fig-cap: "Plot"
+import matplotlib.pyplot as plt
+plt.plot([1,23,2,4])
+plt.show()
+```
+~~~
+
+## tables
+
+- This is probably the most complex elemant of Quarto
+
+- Easiest way is using markdown pipes:
+
+. . . 
+
+```
+| Default | Left | Right | Center |
+|---------|:-----|------:|:------:|
+| 12      | 12   |    12 |   12   |
+| 123     | 123  |   123 |  123   |
+| 1       | 1    |     1 |   1    |
+
+: Demonstration of pipe table syntax {#tbl-numbers}
+```
+
+. . .
+
+| Default | Left | Right | Center |
+|---------|:-----|------:|:------:|
+| 12      | 12   |    12 |   12   |
+| 123     | 123  |   123 |  123   |
+| 1       | 1    |     1 |   1    |
+
+## tables
+
+- You can also write your table in `R` or `Python`
+
+. . .
+
+~~~
+```{python}
+#| label: tbl-planets
+#| tbl-cap: Astronomical object
+
+from IPython.display import Markdown
+from tabulate import tabulate
+table = [["Sun","696,000",1.989e30],
+         ["Earth","6,371",5.972e24],
+         ["Moon","1,737",7.34e22],
+         ["Mars","3,390",6.39e23]]
+Markdown(tabulate(
+  table, 
+  headers=["Astronomical object","R (km)", "mass (kg)"]
+))
+~~~
+
+. . .
+
+![](img/table.png){width="800" fig-align="left"}
+
+## tables
+
+- Can also write tables in $\LaTeX{}$
+
+. . . 
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](img/latextable.png){width="200%"}
+:::
+::: {.column width="50%"}
+
+![](img/latextablerendered.png)
+:::
+:::
+
+## references
+
+- References can be accomplished using a `.bib` file
+
+- Here is an example:
+
+. . .
+
+~~~
+@article{ahmedDiamagneticComponentMap2023a,
+  title = {The Diamagnetic Component Map from Quantitative Susceptibility Mapping ({{QSM}}) Source Separation Reveals Pathological Alteration in {{Alzheimer}}'s Disease-Driven Neurodegeneration},
+  author = {Ahmed, Maruf and Chen, Jingjia and Arani, Arvin and Senjem, Matthew L. and Cogswell, Petrice M. and Jack, Clifford R. and Liu, Chunlei},
+  year = {2023},
+  month = oct,
+  journal = {NeuroImage},
+  volume = {280},
+  pages = {120357},
+  issn = {1095-9572},
+  doi = {10.1016/j.neuroimage.2023.120357},
+  langid = {english},
+  pmid = {37661080},
+  keywords = {Alzheimer Disease,Alzheimer's disease,Brain,Cerebral Cortex,DECOMPOSE,Demyelination,Disease Progression,Gray Matter,Humans,Magnetic susceptibility,Neurodegeneration,Quantitative susceptibility mapping}
+}
+~~~
+
+- referenced in the document with `@ahmedDiamagneticComponentMap2023a`
+
+## in-line code
+
+- You can also mix text with in-line code, in order to reference variables
+
+- For example:
+
+. . .
+
+![](img/inlinecode.png)
+
+![](img/inlinecode_rendered.png)
+
 # Simple Demonstration with Quarto
 
 ## Let's write a manuscript
@@ -311,7 +573,7 @@ You can also include code inline (mixed in with the markdown text)
 
 ## Let's write a manuscript
 
-- We will first need to decide what tool we will use:
+- We will then need to decide what tool we will use:
 ![](img/editors.png)
 
 - Today I will use RStudio as an example
@@ -329,23 +591,11 @@ You can also include code inline (mixed in with the markdown text)
 - In the **New Project** dialog, select **From Version Control**, then **Git**, and copy and paste the repo URL from GitHub.
 ![](img/rstudio_git_manuscript.png)
 
-## Let's write a manuscript
+## Workflow
 
-**Project Files:**
+- The basic workflow for writing a manuscript in Quarto is to make changes to your article content in `index.qmd`, preview the changes with Quarto, and repeat.
 
-- A notebook file where you write your article: `index.qmd`. This file contains:
-  - document metadata, including article front matter (authors, affiliations, etc.) and Quarto options,
-  - the article body, written using special Quarto markdown syntax that allows you to add things like cross references and citations, and
-  - optionally, code, where you control if, or how, the code and its output appear in the article.
-- A configuration file `_quarto.yml` that identifies the project as a Quarto manuscript and controls how your manuscript is put together.
-
-## Let's write a manuscript
-
-**Workflow**
-
-- The basic workflow for writing a manuscript in Quarto is to make changes to your article content in index.qmd, preview the changes with Quarto, and repeat.
-
-- Render and preview the manuscript by hitting the **Render ** button located in the menu bar of the editor:
+- Render and preview the manuscript by hitting the **Render** button located in the menu bar of the editor (RStudio in this case):
 ![](img/renderbutton.png)
 
 ## Let's write a manuscript
@@ -356,21 +606,54 @@ You’ll see some output from Quarto in the Background Jobs pane and then a live
 
 ## Let's write a manuscript
 
-**Notebook Structure**
+What does **Render** do?
 
-The file `index.qmd` is a Quarto markdown file. It contains three types of content:
+![](img/quarto_howitworks.png)
 
-- Starts with a YAML header, used to set document metadata, including scholarly front matter. The YAML header starts and ends with a line of three dashes (`---`)
+- **knitr** executes the code chunks and creates a new markdown (`.md`) document, which includes the code and its output
 
-- May include executable code chunks: start with three backticks followed by the code language in curly braces (e.g. <code>&#96;&#96;&#96;{r}</code> or {<code>&#96;&#96;&#96;{python}</code>). 
-
-- The rest of the document interpreted as Quarto specific markdown, allowing you to include figures, tables, equations, cross references and citations.
+- the `.md` file is then processed by **pandoc**, which translates markdown/HTML/$\LaTeX{}$ into various output formats
 
 ## Let's write a manuscript
 
 Open RStudio
 
 # Real life demonstration
+
+## Open Neovim
+
+# What's Next?
+
+## Collaborating
+
+- Most people will be happy to use the `.docx` and track changes
+
+- Others may wish to publish their page on Github and use the annotation tool
+![](img/annotate.png)
+
+## Collaborating
+
+- Brave souls may wish to make changes to the `.tex` file and track changes with 
+![](img/latexdiff.png)
+
+## Publishing
+
+- Journal will usually want the file in `.docx`, sometimes they accept `.tex`, and rarely they will take `.pdf` for reviewing and then require the `.docx` or `.tex` file
+
+- But `.pdf`s are static... how will people be able to see your source code?
+
+- Publish your HTML manuscript on Github (or other alternatives) and cite your page, perhaps in the **Data Availability** section
+
+- Can add a **binder** using `quarto use binder` and including `code-links: binder` in your `_quarto.yml` file
+
+## Publishing
+
+- [Neurolibre](https://neurolibre.org/)
+
+- [Notebooks Now!](https://data.agu.org/notebooks-now/)
+
+- [eLife example](https://elifesciences.org/articles/52258/executable)
+
 
 # Criticisms
 
@@ -381,10 +664,27 @@ Open RStudio
 - No career incentive to try this new approach
 - Slow to preview/render
 - Errors/bugs can be frustrating
+- Getting complex tables to work in HTML and $\LaTeX{}$
 
 ## What are some criticisms?
 
 - "But people will take my analysis, run it another way, and say my results aren't valid"
 - "This looks hard, I don't want to have to learn *another* new thing"
 
+## What are some criticisms? {background-iframe='{{< meta htmllink >}}'}
+
+# Resources
+
+- {{< fa link >}} <https://quarto.org/docs/get-started/>
+- {{< fa link >}} <https://quarto.org/docs/guide/>
+- {{< fa link >}} <https://quarto.org/docs/manuscripts>
+
 # Summary
+
+## Summary
+
+## Thank you
+
+{{< fa link >}} <>
+
+
