@@ -1,6 +1,8 @@
 ---
 title: "Reproducible Manuscripts"
 author: "Alexander Mark Weber"
+institute: "UBC and BCCHR"
+date: 2024-06-26
 format:
   revealjs:
     incremental: true
@@ -105,6 +107,8 @@ ggplot(data, aes(x="", y=value, fill=group)) +
 
 ```
 
+Out of 100 independently performed replications, only 39% were subjectively labelled as successful replications, and on average, the effects were roughly half the original size ^[https://www.nature.com/articles/s44271-023-00003-2]
+
 ::: {.notes}
 [https://www.nature.com/articles/s44271-023-00003-2]
 
@@ -129,10 +133,13 @@ Not just in Psychology:
 
 ## Problem
 
-- For clinical trials: 44% contained at least some flawed data: 
+- For clinical trials: 44% contained at least some flawed data:^[Carlisle, J. B. Anaesthesia 76, 472–479 (2021).]
   - impossible statistics, 
   - incorrect calculations, 
   - or duplicated numbers or figures
+  - 26% of trials were impossible to judge: either due to incompetence or faked data
+
+## Problem
 
 - Publishing irreproducible results is worse than not publishing: more difficult to eliminate an idea than it is to introduce it^[C. Piller. Disgraced COVID-19 studies are still routinely cited. Science, 371 (2021), pp. 331-332; E.M. Bucci. On zombie papers. Cell Death Dis, 10 (2019), p. 189; S.B. Nissen, T. Magidson, K. Gross, C.T. Bergstrom. Publication bias and the canonization of false facts. eLife, 5 (2016), Article e21451] 
 
@@ -174,12 +181,13 @@ This is where **Reproducible Papers** come in...
 ## Learning Goals
 
 By the end of the talk, the audience should:
+
 - Know what a reproducible manuscript is,
 - Understand some reasons why scientists should be writing their manuscripts this way,
 - Know what Markdown, Knitr, Pandoc, LaTeX, Jupyter Notebook, R/RMarkdown, and Quarto are,
-- Know the basics of the syntax for Markdown, R and Quarto are,
+- Know the basics of the syntax for Markdown, R and Quarto,
 - See how to integrate author information, code, equations, tables, images, and citations
-- Be able to start writing your next manuscript using Quarto Manuscripts, and convert to any format you wish (html, pdf, docx), including converting to paper-specific formatting.
+- Be able to start writing your next manuscript using Quarto Manuscripts
 
 # Introduction
 
@@ -224,8 +232,8 @@ By the end of the talk, the audience should:
 
 - easy cross-referencing and citations
 - allow for more rigorous meta-analyses studies to be performed (raw-data)
-- be authored in your favorite code editor
-- render from qmd to PDF, Word, HTML, $\LaTeX{}$, etc.
+- can be written in your favorite code editor (RStudio, VSCode, plain text editor, Neovim)
+- render from `.qmd` to PDF, Word, HTML, $\LaTeX{}$, etc.
 - execute code in R, Python, Julia, and more
 - apply journal styles to your outputs with Quarto extensions
 - publish to Github Pages, Netlify, and more
@@ -238,7 +246,8 @@ A notebook is a document that contains both **code** and **narrative**:
 
 ::: {.columns}
 ::: {.column width="50%"}
-- Jupyter notebooks (.ipynb)
+- Jupyter notebooks (`.ipynb`)
+![](img/jupy.png){.fragment .absolute top=300 left=100 width="350"}
 :::
 ::: {.column width="50%"}
 
@@ -246,7 +255,8 @@ A notebook is a document that contains both **code** and **narrative**:
 :::
 :::
 
-![](img/jupy.png){.fragment .absolute top=300 left=100 width="350"}
+
+## Aside: What is a notebook? {background-iframe='{{< meta htmllink >}}'}
 
 ## Aside: What is a notebook?
 
@@ -255,7 +265,8 @@ A notebook is a document that contains both **code** and **narrative**:
 ::: {.columns}
 ::: {.column width="40%"}
 ::: {.nonincremental}
-- Rmarkdown (.rmd)
+- Rmarkdown (`.rmd`)
+![](img/rlogo.png){.fragment .absolute top=300 left=100 width="250"}
 :::
 :::
 ::: {.column width="60%"}
@@ -263,7 +274,8 @@ A notebook is a document that contains both **code** and **narrative**:
 :::
 :::
 
-![](img/rlogo.png){.fragment .absolute top=300 left=100 width="250"}
+
+## Aside: What is a notebook? {background-iframe='{{< meta htmllink >}}'}
 
 ## Aside: What is a notebook?
 
@@ -272,7 +284,8 @@ A notebook is a document that contains both **code** and **narrative**:
 ::: {.columns}
 ::: {.column width="40%"}
 ::: {.nonincremental}
-- Quarto document (.qmd)
+- Quarto document (`.qmd`)
+![](img/quartologo.png){.fragment .absolute top=350 left=50 width="350"}
 :::
 :::
 ::: {.column width="60%"}
@@ -280,7 +293,6 @@ A notebook is a document that contains both **code** and **narrative**:
 :::
 :::
 
-![](img/quartologo.png){.fragment .absolute top=350 left=50 width="350"}
 
 ## Aside: What are notebooks good for?
 
@@ -401,7 +413,7 @@ echo: false
 
 ## figures
 
-`![Elephant](/path/to/elephant.png){fig-elephant}`
+`![An elephant](/path/to/elephant.png){fig-elephant}`
 
 - Can be cross referenced with `@fig-elephant` in the document
 
@@ -440,20 +452,18 @@ For example, see @fig-plot.
 . . .
 
 ~~~
-```python
 #| label: fig-plot
 #| fig-cap: "Plot"
 import matplotlib.pyplot as plt
 plt.plot([1,23,2,4])
 plt.show()
-```
 ~~~
 
 ## tables
 
-- This is probably the most complex elemant of Quarto
+- This is probably the most complex element of Quarto
 
-- Easiest way is using markdown pipes:
+- Easiest way is using markdown pipes (using RStudio Visual mode):
 
 . . . 
 
@@ -504,7 +514,7 @@ Markdown(tabulate(
 
 ## tables
 
-- Can also write tables in $\LaTeX{}$
+- Can also write tables in $\LaTeX{}$ (but may not be converted to HTML well, and vice versa)
 
 . . . 
 
@@ -633,16 +643,16 @@ Open RStudio
 
 ## Collaborating
 
-- Brave souls may wish to make changes to the `.tex` file and track changes with 
+- Brave souls may wish to make changes to the `.tex` file and track changes with `latexdiff`
 ![](img/latexdiff.png)
 
 ## Publishing
 
-- Journal will usually want the file in `.docx`, sometimes they accept `.tex`, and rarely they will take `.pdf` for reviewing and then require the `.docx` or `.tex` file
+- Journal will usually want the file in `.docx`, sometimes they accept `.tex`, and rarely they will take `.pdf` for reviewing and then require the `.docx` or `.tex` file once accepted
 
-- But `.pdf`s are static... how will people be able to see your source code?
+- But `.pdf`s are static... how will people be able to see your source code once your paper is published?
 
-- Publish your HTML manuscript on Github (or other alternatives) and cite your page, perhaps in the **Data Availability** section
+- Publish your HTML manuscript on Github (or other alternatives) and cite your page in your pdf, perhaps in the **Data Availability** section
 
 - Can add a **binder** using `quarto use binder` and including `code-links: binder` in your `_quarto.yml` file
 
@@ -660,11 +670,11 @@ Open RStudio
 ## What are some barriers?
 
 - Conversion to different outputs is not always straightforward, and sometimes may not be possible to replicate what you want
-- Steep learning curve
-- No career incentive to try this new approach
-- Slow to preview/render
-- Errors/bugs can be frustrating
 - Getting complex tables to work in HTML and $\LaTeX{}$
+- Steep learning curve
+- No career incentive to try this new approach (i.e. "who has the time?")
+- Slow to preview/render
+- Errors/bugs can be frustrating (this is where a good text editor can be incredibly handy)
 
 ## What are some criticisms?
 
@@ -673,19 +683,36 @@ Open RStudio
 
 ## What are some criticisms? {background-iframe='{{< meta htmllink >}}'}
 
-# Resources
+# Summary
+
+## Summary
+
+In this talk, we learned about
+
+- What a reproducible manuscript is,
+- Some reasons why scientists should be writing their manuscripts this way,
+- What Markdown, Knitr, Pandoc, LaTeX, Jupyter Notebook, R/RMarkdown, and Quarto are,
+- The basics of the syntax for Markdown, R and Quarto,
+- How to integrate author information, code, equations, tables, images, and citations
+- How to start writing your next manuscript using Quarto Manuscripts
+
+## Resources
 
 - {{< fa link >}} <https://quarto.org/docs/get-started/>
 - {{< fa link >}} <https://quarto.org/docs/guide/>
 - {{< fa link >}} <https://quarto.org/docs/manuscripts>
 
-# Summary
+- {{< fa link >}} <https://www.learnlatex.org/en/>
+- {{< fa link >}} <https://www.markdownguide.org/>
 
-## Summary
+## Resources
 
-## Thank you
+- {{< fa book >}} <https://press.princeton.edu/books/hardcover/9780691222738/data-science-for-neuroimaging>
+![](img/datascienceneuroimag.png)
 
-{{< fa link >}} <>
+## Thank you {background-image="img/archie.png" background-opacity=0.5}
+
+{{< fa brands github >}} <https://github.com/weberam2/ReproducibleManuscriptTalk>
 
 {{< fa envelope >}} [aweber@bcchr.ca](mailto:aweber@bcchr.ca)
 
