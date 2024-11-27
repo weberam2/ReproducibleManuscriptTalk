@@ -2,7 +2,7 @@
 title: "Reproducible Manuscripts"
 author: "Alexander Mark Weber"
 institute: "UBC and BCCHR"
-date: 2024-06-26
+date: 2024-11-27
 format:
   revealjs:
     incremental: true
@@ -78,7 +78,7 @@ Was he right?
 
 ## Problem {.nonincremental}
 
-```{r}
+```{r, fig.height=4}
 #| label: fig-opensci
 
 # Load ggplot2
@@ -247,7 +247,7 @@ A notebook is a document that contains both **code** and **narrative**:
 ::: {.columns}
 ::: {.column width="50%"}
 - Jupyter notebooks (`.ipynb`)
-![](img/jupy.png){.fragment .absolute top=300 left=100 width="350"}
+![](img/jupy.png){.fragment .absolute top=350 left=100 width="350"}
 :::
 ::: {.column width="50%"}
 
@@ -628,9 +628,11 @@ What does **Render** do?
 
 Open RStudio
 
+[https://github.com/quarto-ext/manuscript-template-rstudio/generate](https://github.com/quarto-ext/manuscript-template-rstudio/generate)
+
 # Real life demonstration
 
-## Open Neovim
+## Open RStudio
 
 # What's Next?
 
@@ -669,11 +671,11 @@ Open RStudio
 
 ## What are some barriers?
 
-- Conversion to different outputs is not always straightforward, and sometimes may not be possible to replicate what you want
+- Conversion to different outputs (`.docx` `.html` `.pdf`) is not always straightforward
 - Getting complex tables to work in HTML and $\LaTeX{}$
 - Steep learning curve
 - No career incentive to try this new approach (i.e. "who has the time?")
-- Slow to preview/render
+- Slow to preview/render (although you can set `execute: freeze: auto` so that computational documents are only re-rendered if their source file has changed)
 - Errors/bugs can be frustrating (this is where a good text editor can be incredibly handy)
 
 ## What are some criticisms?
@@ -708,12 +710,18 @@ In this talk, we learned about
 ## Resources
 
 - {{< fa book >}} <https://press.princeton.edu/books/hardcover/9780691222738/data-science-for-neuroimaging>
-![](img/datascienceneuroimag.png)
+![](img/datascienceneuroimag.png){width=4in}
 
 ## Thank you {background-image="img/archie.png" background-opacity=0.5}
+
+![](img/repman.png){.absolute top=20 left=700 width="200"}
 
 {{< fa brands github >}} <https://github.com/weberam2/ReproducibleManuscriptTalk>
 
 {{< fa envelope >}} [aweber@bcchr.ca](mailto:aweber@bcchr.ca)
 
+{{< fa brands mastodon >}} [@weberam2@mastodon.social](https://mastodon.social/@weberam2)
 
+{{< fa brands bluesky >}} [@weberam2.bsky.social](https://bsky.app/profile/weberam2.bsky.social)
+
+{{< fa brands x-twitter >}} [delete your Twitter account](https://www.theverge.com/24293448/x-twitter-musk-deactivate-how-to)
